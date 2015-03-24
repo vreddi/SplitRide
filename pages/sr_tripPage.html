@@ -7,7 +7,7 @@
 		<link rel="stylesheet"href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="../css/sr_signup-style.css">
+		<!--<link rel="stylesheet" type="text/css" href="../css/sr_signup-style.css">!-->
 		<link rel="stylesheet" type="text/css" href="../resources/bootstrap-3.3.2-dist/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="../resources/font-awesome-4.3.0/css/font-awesome.css">
 
@@ -91,11 +91,13 @@
 		
 		<div class = "container">
 			<h2>Select a destination</h2>
-			<iframe>
+			<iframe
+				height = "400"
+				width = "600"
 			  	frameborder="0" style="border:0"
 			  	src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyDXfOS4U6P6O3flOx8zVieIVXu7sh92mqE
 			    &origin=Illini Union,Champaign+IL
-			    &destination=Northbrook Court, Northbrook+IL" 
+			    &destination=Northbrook Court, Northbrook+IL">
 			</iframe>
 			<div id="locationField" class = "form-group">
 	      		<input id="autocomplete" placeholder="Enter the Destination"
