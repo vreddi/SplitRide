@@ -88,15 +88,20 @@
 	    </script>
 	</head>
 	<body onload="initialize()">
-		
-		<div class = "container">
+		<!--
+		<div class="container">
 			<h2>Select a destination</h2>
-			<iframe>
+			<iframe
+				width="600"
+			  	height="450"
 			  	frameborder="0" style="border:0"
 			  	src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyDXfOS4U6P6O3flOx8zVieIVXu7sh92mqE
 			    &origin=Illini Union,Champaign+IL
 			    &destination=Northbrook Court, Northbrook+IL" 
 			</iframe>
+		</div>
+		!-->
+		<div class = "container">
 			<div id="locationField" class = "form-group">
 	      		<input id="autocomplete" placeholder="Enter the Destination"
 	             	onFocus="geolocate()" type="text"></input>
