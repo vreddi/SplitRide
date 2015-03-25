@@ -12,16 +12,24 @@
 
     <!-- Linking Font-Awesome 4.3.0 -->
     <link rel="stylesheet" type="text/css" href="resources/font-awesome-4.3.0/css/font-awesome.css">
+
+    <!-- Linking jQuery -->
+    <script type="text/javascript" src="js/jquery-1.11.2.js"></script>
+
+    <!-- Linking Login Script -->
+    <script type="text/javascript" src="js/sr_sign-up.js"></script>
+
 </head>
 
 <body>
 
-<video>
+    <!-- Attaching the Background Video for the sign-up page-->
+    <video id="vid-bg" autoplay muted loop src="resources/videos/roadtrip.mp4"></video>
 
-</video>
-</div>
 
-    <div class="container">
+
+    <!-- Login Frame (Gmail-like) -->
+    <div class="container" id = "content">
         <div class="row">
             <div class="col-sm-6 col-md-4 col-md-offset-4">
                 <div class="account-wall">
@@ -38,14 +46,14 @@
                     </label>
                     <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
                     </form>
+                    <a class="text-center new-account" href="#register" data-toggle="modal">Create an account </a>
                 </div>
-                <a class="text-center new-account" href="#register" data-toggle="modal">Create an account </a>
             </div>
         </div>
     </div>
 
 
-
+    <!-- Regesteration Window -->
     <div class="modal fade" id="register" aria-labelledby="modalLabel" aria-hidden="true">
 
         <div class="modal-dialog">
@@ -91,11 +99,13 @@
                         </form>
         </div>
 
+
         <div class="modal-footer">
             <button type="reset" class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
         </div>
 
     </div>
+
     </div>
 
 

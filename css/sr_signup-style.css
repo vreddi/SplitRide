@@ -1,7 +1,8 @@
+/* background-color: #5BC5A6 !important; */
+
 html, body{
     width: 100%;
     height: 100%;
-    background-color: #5BC5A6 !important;
 }
 
 .form-signin
@@ -75,4 +76,15 @@ html, body{
 {
     display: block;
     margin-top: 10px;
+}
+
+#content{
+    margin: 0 auto;
+    position: relative;
+    display: block;
+}
+
+video#vid-bg{
+    position: fixed;
+    width:100%;
 }
