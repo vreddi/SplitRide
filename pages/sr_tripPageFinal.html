@@ -27,7 +27,7 @@
     	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 
     	<!-- Linking the Plan Trip Script -->
-    	<script href="../js/sr_planTrip-script.css"></script>
+    	<script src="../js/sr_planTrip-script.js"></script>
 
 	</head>
 
@@ -35,7 +35,8 @@
 
 	<body onload="initialize()">
 
-		<iframe style="overflow:hidden; height:100%; width: 500px float: left" height="100%" width="800px"
+		<!-- Google Map Displayed -->
+		<iframe style="overflow:hidden; height:100%; width: 500px float: left; border-right: 1px solid black;" height="100%" width="800px"
 			  	frameborder="0" style="border:0"
 			  	src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyDXfOS4U6P6O3flOx8zVieIVXu7sh92mqE
 			    &origin=Illini Union,Champaign+IL
@@ -45,29 +46,28 @@
 		<div id="rightContainer">
 
 			<div class = "container">
-			<h1>Plan a Trip</h1>
+				<h1>Plan a Trip</h1>
 
 
-			<form>
-  				<div class="form-group">
-    				<label for="exampleInputEmail1">Email address</label>
-  						<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-  				</div>
-  
-  				<div class="form-group">
-				    <label for="exampleInputPassword1">Password</label>
-				    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-				</div>
+				<form>
 
-				<div class="form-group">
-				    <label for="exampleInputFile">File input</label>
-				    <input type="file" id="exampleInputFile">
-				    <p class="help-block">Example block-level help text here.</p>
-  				</div>
-			</form>
+	  				<div class="form-group">
+	    				<label>Source: </label>
+	  					<div id="locationField" class = "form-group">
+		      				<input id="autocomplete" class="form-control" id="exampleInputName2"  placeholder="Enter the Source" onFocus="geolocate()" type="text"></input>
 
+		      			<label>Destination: </label>
+							    <div id="locationField" class = "form-group">
+				      				<input id="autocomplete" placeholder="Enter the Destination" onFocus="geolocate()" type="text"></input>
+				    			</div>
+		    				</div>
+	  				</div>
 
+				</form>
+			</div>
+		</div>
 
+			<!--
 
 			<div id="locationField" class = "form-group">
 	      		<input id="autocomplete" placeholder="Enter the Destination"
@@ -102,8 +102,7 @@
 	     	</div> 
 	     </div>
 
-		</div>
+	-->
 		
-
 	</body>
 </html>
