@@ -1,0 +1,11 @@
+html, body{
+    width: 100%;
+    height: 100%;
+    background-color: #EEE !important;
+}
+
+
+sr_header{
+    position: fixed;
+    background-color: #5BC5A6 !important;
+}

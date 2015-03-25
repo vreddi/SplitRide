@@ -1,0 +1,25 @@
+html, body{
+	height: 100%;
+	width: 100%;
+	background-color: #EEE !important;
+}
+
+#map-canvas{
+	height: 100%;
+	margin: 0px;
+	padding: 0px
+}
+
+#rightContainer{
+
+	border: 2px solid green;
+	width: 500px;
+	height: auto;
+	float: right;
+}
+
+#mapConfig{
+	height: 100%;
+	width: 500px;
+	float: left;
+}
