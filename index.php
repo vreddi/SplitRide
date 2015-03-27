@@ -27,7 +27,6 @@
     <video id="vid-bg" autoplay muted loop src="resources/videos/roadtrip.mp4"></video>
 
 
-
     <!-- Login Frame (Gmail-like) -->
     <div class="container" id = "content">
         <div class="row">
@@ -109,7 +108,6 @@
     </div>
 
 
-   
 
 
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
