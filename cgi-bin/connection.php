@@ -30,7 +30,7 @@ data.
         
         echo "<h1 style=\" top: 0;\">"
         echo("Successful Connection!");
-        echo "</h1>"
+        echo "</h1>";
         /* SELECT the Databse to Use */
         mysql_select_db('splitrid_db', $link) or die('Could not select database.');
         
