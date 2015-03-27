@@ -62,33 +62,49 @@
          </div>
 
         <div class="modal-body">
-            <form role="form">
+            <form role="form" action="queries.php?q=add_user" method="post">
+                            <!--
+                            <div class="alert alert-danger" role="alert" name = "password-error" id = "password-error">
+                              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                              <span class="sr-only">Error:</span>
+                              Passwords do not match.
+                            </div>
+                            <div class="alert alert-danger" role="alert" name = "email-error" id = "email-error">
+                              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                              <span class="sr-only">Error:</span>
+                              Invalid email address.
+                            </div>
+                            <div class="alert alert-danger" role="alert" name = "not-unique" id = "not-unique">
+                              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                              <span class="sr-only">Error:</span>
+                              Another user has entered that email address. 
+                            </div> !-->
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
-                            <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+                                        <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name" required>
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
-                                        <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                                        <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name" reuired>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                                <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address" required>
                             </div>
 
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
-                                        <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                                        <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password" required>
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
-                                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password" required>
                                     </div>
                                 </div>
                             </div>
@@ -106,10 +122,15 @@
     </div>
 
     </div>
-
-
-
-
+    <script>
+        $('#password_confirmation').on('keyup', function(e){
+                if ($(this).val() == $('#password').val()) {
+                    $('#message').html('matching').css('color', 'green');
+                } 
+                else $('#message').html('not matching').css('color', 'red');
+            }
+        )
+    </script>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="resources/bootstrap-3.3.2-dist/js/bootstrap.js"></script>
 </body>
