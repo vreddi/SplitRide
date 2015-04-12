@@ -1,3 +1,7 @@
+<?php
+ini_set('display_errors', 'On');
+error_reporting(E_ALL | E_STRICT);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -35,8 +39,8 @@
                     <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                         alt="">
                     <form class="form-signin" method="post" action="queries.php?q=validate_user">
-                    <input type="text" class="form-control" name="username" placeholder="Email" required autofocus>
-                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    <input type="text" class="form-control" placeholder="Email" name = username required autofocus>
+                    <input type="password" class="form-control" name = password placeholder="Password" required>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">
                         Sign in</button>
                     <label class="checkbox pull-left">
@@ -129,7 +133,7 @@
                 } 
                 else $('#message').html('not matching').css('color', 'red');
             }
-        )
+        );
     </script>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="resources/bootstrap-3.3.2-dist/js/bootstrap.js"></script>

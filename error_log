@@ -1,0 +1,73 @@
+[27-Mar-2015 01:43:09 America/Chicago] PHP Parse error:  syntax error, unexpected '[' in /home/splitride/public_html/queries.php on line 16
+[27-Mar-2015 01:45:02 America/Chicago] PHP Parse error:  syntax error, unexpected '[' in /home/splitride/public_html/queries.php on line 16
+[27-Mar-2015 01:46:14 America/Chicago] PHP Notice:  Undefined index: q in /home/splitride/public_html/queries.php on line 13
+[27-Mar-2015 01:46:14 America/Chicago] PHP Notice:  Use of undefined constant q - assumed 'q' in /home/splitride/public_html/queries.php on line 14
+[27-Mar-2015 01:49:38 America/Chicago] PHP Notice:  Undefined index: q in /home/splitride/public_html/queries.php on line 13
+[27-Mar-2015 01:54:47 America/Chicago] PHP Notice:  Undefined variable: getConnection in /home/splitride/public_html/queries.php on line 32
+[27-Mar-2015 01:54:47 America/Chicago] PHP Fatal error:  Function name must be a string in /home/splitride/public_html/queries.php on line 32
+[27-Mar-2015 01:55:35 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, resource given in /home/splitride/public_html/queries.php on line 32
+[27-Mar-2015 01:57:02 America/Chicago] PHP Warning:  mysqli_select_db() expects parameter 1 to be mysqli, string given in /home/splitride/public_html/connection.php on line 37
+[27-Mar-2015 02:30:24 America/Chicago] PHP Fatal error:  Call to undefined function validateUser() in /home/splitride/public_html/queries.php on line 23
+[27-Mar-2015 02:32:27 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[27-Mar-2015 02:32:27 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[27-Mar-2015 02:32:27 America/Chicago] PHP Warning:  mysql_query() expects parameter 2 to be resource, object given in /home/splitride/public_html/queries.php on line 49
+[27-Mar-2015 02:32:27 America/Chicago] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, null given in /home/splitride/public_html/queries.php on line 52
+[27-Mar-2015 02:34:47 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[27-Mar-2015 02:34:47 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[27-Mar-2015 02:34:47 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, string given in /home/splitride/public_html/queries.php on line 47
+[27-Mar-2015 02:34:47 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/splitride/public_html/queries.php on line 50
+[27-Mar-2015 02:36:24 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[27-Mar-2015 02:36:24 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[27-Mar-2015 02:37:06 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[27-Mar-2015 02:37:06 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[27-Mar-2015 02:43:37 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/splitride/public_html/queries.php on line 50
+[27-Mar-2015 02:47:44 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[27-Mar-2015 02:47:44 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[27-Mar-2015 02:47:44 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/splitride/public_html/queries.php on line 50
+[27-Mar-2015 02:47:51 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/splitride/public_html/queries.php on line 50
+[27-Mar-2015 02:50:41 America/Chicago] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/splitride/public_html/queries.php on line 62
+[27-Mar-2015 02:51:05 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/splitride/public_html/queries.php on line 50
+[27-Mar-2015 02:52:25 America/Chicago] PHP Catchable fatal error:  Object of class mysqli_result could not be converted to string in /home/splitride/public_html/queries.php on line 61
+[27-Mar-2015 02:53:18 America/Chicago] PHP Fatal error:  Cannot use object of type mysqli_result as array in /home/splitride/public_html/queries.php on line 61
+[27-Mar-2015 02:54:16 America/Chicago] PHP Notice:  Undefined property: mysqli_result::$FirstName in /home/splitride/public_html/queries.php on line 61
+[28-Mar-2015 13:39:51 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[28-Mar-2015 13:39:51 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[28-Mar-2015 19:16:31 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[28-Mar-2015 19:16:32 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[28-Mar-2015 22:31:46 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[28-Mar-2015 22:31:46 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[29-Mar-2015 16:18:50 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[29-Mar-2015 16:18:50 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[29-Mar-2015 16:30:03 America/Chicago] PHP Notice:  Undefined index: first_name in /home/splitride/public_html/queries.php on line 16
+[29-Mar-2015 16:30:03 America/Chicago] PHP Notice:  Undefined index: last_name in /home/splitride/public_html/queries.php on line 17
+[29-Mar-2015 16:30:03 America/Chicago] PHP Notice:  Undefined index: email in /home/splitride/public_html/queries.php on line 18
+[29-Mar-2015 16:30:03 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 19
+[30-Mar-2015 16:14:02 America/Chicago] PHP Notice:  Undefined index: first_name in /home/splitride/public_html/queries.php on line 16
+[30-Mar-2015 16:14:02 America/Chicago] PHP Notice:  Undefined index: last_name in /home/splitride/public_html/queries.php on line 17
+[30-Mar-2015 16:14:02 America/Chicago] PHP Notice:  Undefined index: email in /home/splitride/public_html/queries.php on line 18
+[30-Mar-2015 16:14:02 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 19
+[30-Mar-2015 16:37:24 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[30-Mar-2015 16:37:24 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[01-Apr-2015 14:35:42 America/Chicago] PHP Parse error:  syntax error, unexpected 'container' (T_STRING), expecting ',' or ';' in /home/splitride/public_html/queries.php on line 57
+[01-Apr-2015 14:36:33 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[01-Apr-2015 14:36:33 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[01-Apr-2015 14:39:29 America/Chicago] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home/splitride/public_html/queries.php on line 59
+[01-Apr-2015 14:40:13 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[01-Apr-2015 14:40:13 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[01-Apr-2015 14:41:54 America/Chicago] PHP Parse error:  syntax error, unexpected 'frameborder' (T_STRING), expecting ',' or ';' in /home/splitride/public_html/queries.php on line 59
+[01-Apr-2015 17:30:14 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[01-Apr-2015 17:30:14 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[01-Apr-2015 19:26:56 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[01-Apr-2015 19:26:56 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[01-Apr-2015 19:27:26 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[01-Apr-2015 19:27:26 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[02-Apr-2015 10:34:13 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[02-Apr-2015 10:34:13 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[02-Apr-2015 11:10:20 America/Chicago] PHP Notice:  Undefined index: first_name in /home/splitride/public_html/queries.php on line 16
+[02-Apr-2015 11:10:20 America/Chicago] PHP Notice:  Undefined index: last_name in /home/splitride/public_html/queries.php on line 17
+[02-Apr-2015 11:10:20 America/Chicago] PHP Notice:  Undefined index: email in /home/splitride/public_html/queries.php on line 18
+[02-Apr-2015 11:10:20 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 19
+[02-Apr-2015 11:59:18 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[02-Apr-2015 11:59:18 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24
+[03-Apr-2015 05:50:07 America/Chicago] PHP Notice:  Undefined index: password in /home/splitride/public_html/queries.php on line 23
+[03-Apr-2015 05:50:07 America/Chicago] PHP Notice:  Undefined index: username in /home/splitride/public_html/queries.php on line 24

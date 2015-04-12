@@ -8,6 +8,8 @@ data.
 */
 
     $link = false;
+ini_set('display_errors', 'On');
+error_reporting(E_ALL | E_STRICT);
     
     
     /*
@@ -26,13 +28,13 @@ data.
            
         /* Getting Connection Link */
         /* Implementation: mysql_connect( __HOSTNAME__, __USERNAME__, __PASSWORD__) */ 
-        $link = mysql_connect( 'engr-cpanel-mysql.engr.illinois.edu', 'splitrid_admin', '12345') or die('Could not connect to server.' );
+        $link = mysqli_connect( 'engr-cpanel-mysql.engr.illinois.edu', 'splitrid_admin', '12345', 'splitrid_db') or die('Could not connect to server.' );
         
-        echo "<h1 style=\" top: 0;\">"
+        echo "<h1 style=\" top: 0;\">";
         echo("Successful Connection!");
         echo "</h1>";
         /* SELECT the Databse to Use */
-        mysql_select_db('splitrid_db', $link) or die('Could not select database.');
+        //mysqli_select_db('splitrid_db', $link) or die('Could not select database.');
         
         // Return the connection link to the requester
         return $link;
@@ -44,7 +46,7 @@ data.
     {
         global $link;
         if( $link != false )
-            mysql_close($link);
+            mysqli_close($link);
         $link = false;
     }
     
