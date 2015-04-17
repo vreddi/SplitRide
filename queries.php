@@ -4,6 +4,15 @@ FILE: queries.php
 DESCRIPTION: Used for all the different kinds of queries the SplitRide application would require. Each 
 Query is a different function of request in the file.
 */
+
+//setting cookies if validating user
+if($_REQUEST['q']=='validate_user')
+{
+    $cookie_name = "user";
+    $cookie_value = $_POST['username'];
+    setcookie($cookie_name, $cookie_value, time() + (60), "/"); // 86400 = 1 day
+}
+//--------------------
 ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
     //Connect Connection Script
