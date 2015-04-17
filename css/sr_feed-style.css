@@ -7,5 +7,10 @@ html, body{
 
 sr_header{
     position: fixed;
-    background-color: #5BC5A6 !important;
+    background-color: #2e6da4 !important;
+}
+
+.panel textarea, .well textarea, textarea.form-control
+{
+   resize: none;
 }

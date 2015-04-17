@@ -5,6 +5,7 @@ DESCRIPTION: Used for all the different kinds of queries the SplitRide applicati
 Query is a different function of request in the file.
 */
 
+<<<<<<< Updated upstream
 //setting cookies if validating user
 if($_REQUEST['q']=='validate_user')
 {
@@ -13,8 +14,12 @@ if($_REQUEST['q']=='validate_user')
     setcookie($cookie_name, $cookie_value, time() + (60), "/"); // 86400 = 1 day
 }
 //--------------------
+=======
+
+>>>>>>> Stashed changes
 ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
+   
     //Connect Connection Script
     include("connection.php");
     
@@ -22,10 +27,7 @@ error_reporting(E_ALL | E_STRICT);
     $query_func = $_REQUEST['q'];
     switch ($query_func) {
     	case 'add_user':
-    		addUser($_POST['first_name'], 
-		$_POST['last_name'], 
-		$_POST['email'], 
-		md5($_POST['password']));
+    		addUser($_POST['first_name'], $_POST['last_name'], $_POST['email'], md5($_POST['password']));
     		break;
     	
         case 'validate_user':
@@ -37,6 +39,16 @@ error_reporting(E_ALL | E_STRICT);
     		break;
     }
     
+
+    /**
+    * Description: This function is used to add a user to the database. THe data is added to the 'Users'
+    * Table. Currently it does not check for the validity of the data.
+    *
+    * @param firstname
+    * @param lastName
+    * @param email
+    * @param password
+    */
     function addUser($fisrtName, $lastName, $emailAddress, $password){
     	$format = 'INSERT INTO Users(FirstName, LastName, Email, Password) VALUES (\'%s\', \'%s\', \'%s\', \'%s\')';
     	$query = sprintf($format, $fisrtName, $lastName, $emailAddress, $password);
@@ -48,10 +60,17 @@ error_reporting(E_ALL | E_STRICT);
     }
 
 
+    /**
+    * Description: This function validates the user data from the database. Checks for the
+    * data presence in the data table and presents the response accordingly.
+    *
+    * @param username
+    * @param password
+    */
     function validateLogin($username, $password){   
 
 
-	echo "(Verification Data for Initial Demo:) Username:".$username."\tPassword:".$password;
+	   echo "(Verification Data for Initial Demo:) Username:".$username."\tPassword:".$password;
 
         $query = "SELECT * FROM Users WHERE Email ='".$username."' AND Password = '".$password."';" ;
                         
