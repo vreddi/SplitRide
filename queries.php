@@ -32,6 +32,24 @@ error_reporting(E_ALL | E_STRICT);
                 $encrip_password = md5($_POST['password']);
                 validateLogin($_POST['username'], $encrip_password);
                 break;
+
+        case 'get_trip':
+                break;
+
+        case 'get_trip_comments':
+                break;
+
+        case 'get_trip_likes':
+                break;
+
+        case 'get_user_details':
+                break:
+
+        case 'get_cost':
+                break;       
+
+        
+
     	default:
     		# code...
     		break;
@@ -93,4 +111,26 @@ error_reporting(E_ALL | E_STRICT);
         }
 
     }
+
+    function getTrip() {
+
+    }
+
+    function getTripComment() {
+
+    }
+
+    function getTripLikes() {
+
+    }
+
+    function getUser() {
+
+    }
+
+    function cost() {
+        
+    }
+
+
 ?>
