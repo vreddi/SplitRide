@@ -1,18 +1,20 @@
 <?php
 
+
 ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
 
 
 
-if(!isset($_COOKIE['user'])) {
-    echo "Cookie named '" . $cookie_name . "' is not set!";
-} else {
-    header('Location: https://splitride.web.engr.illinois.edu/cook.php' ) ;
+    if(!isset($_COOKIE['user'])) {
+        echo "Cookie named '" . $cookie_name . "' is not set!";
+    } else {
+        header('Location: https://splitride.web.engr.illinois.edu/cook.php' ) ;
 
-}
+    }
 
-
+    ini_set('display_errors', 'On');
+    error_reporting(E_ALL | E_STRICT);
 ?>
 
 <!DOCTYPE html>
@@ -52,8 +54,8 @@ if(!isset($_COOKIE['user'])) {
                     <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                         alt="">
                     <form class="form-signin" method="post" action="queries.php?q=validate_user">
-                    <input type="text" class="form-control" placeholder="Email" name = username required autofocus>
-                    <input type="password" class="form-control" name = password placeholder="Password" required>
+                    <input type="text" class="form-control" placeholder="Email" name = "username" required autofocus>
+                    <input type="password" class="form-control" name = "password" placeholder="Password" required>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">
                         Sign in</button>
                     <label class="checkbox pull-left">
