@@ -1,20 +1,13 @@
 <?php
 
-
-ini_set('display_errors', 'On');
-error_reporting(E_ALL | E_STRICT);
-
     $cookie_name = 'user';
 
     if(!isset($_COOKIE['user'])) {
         echo "Cookie named '" . $cookie_name . "' is not set!";
     } else {
-        header('Location: https://splitride.web.engr.illinois.edu/cook.php' ) ;
+        header('Location: cook.php' ) ;
 
     }
-
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL | E_STRICT);
 ?>
 
 <!DOCTYPE html>
