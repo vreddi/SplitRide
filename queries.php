@@ -11,7 +11,7 @@ if($_REQUEST['q']=='validate_user')
 {
     $cookie_name = "user";
     $cookie_value = $_POST['username'];
-    setcookie($cookie_name, $cookie_value, time() + (60), "/"); // 86400 = 1 day
+    setcookie($cookie_name, $cookie_value, time() + (300), "/"); // 86400 = 1 day
 }
 
 
@@ -33,6 +33,9 @@ error_reporting(E_ALL | E_STRICT);
                 validateLogin($_POST['username'], $encrip_password);
                 break;
 
+        case 'upload_profile_pic':
+                upload_pp($_COOKIE['user']);
+                break;
         case 'get_trip':
                 break;
 
@@ -111,6 +114,49 @@ error_reporting(E_ALL | E_STRICT);
         }
 
     }
+
+    /**
+    * Description: This function uploads the picture that the user provides to imgur 
+    * and then saves the url generated to the database
+    * @param username (generated from the cookies)
+    */
+    function upload_pp($username) {
+        $img=$_FILES['img'];
+        $url = "";
+            if(isset($_POST['submit'])){ 
+             if($img['name']==''){  
+              echo "<h2>An Image Please.</h2>";
+             }else{
+              $filename = $img['tmp_name'];
+              $client_id="0de23ade0aa4f95";
+              $handle = fopen($filename, "r");
+              $data = fread($handle, filesize($filename));
+              $pvars   = array('image' => base64_encode($data));
+              $timeout = 30;
+              $curl = curl_init();
+              curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+              curl_setopt($curl, CURLOPT_TIMEOUT, $timeout);
+              curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . $client_id));
+              curl_setopt($curl, CURLOPT_POST, 1);
+              curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+              curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+              $out = curl_exec($curl);
+              curl_close ($curl);
+              $pms = json_decode($out,true);
+              $url=$pms['data']['link'];
+              if($url!=""){
+               echo "<h2>Uploaded Without Any Problem</h2>";
+               echo "<img src='$url'/>";
+              }else{
+               echo "<h2>There's a Problem</h2>";
+               echo $pms['data']['error'];  
+          } 
+         }
+        }
+        echo "<img src = \"".$URL."\">";
+      }
+
+
 
     function getTrip() {
 

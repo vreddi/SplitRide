@@ -8,3 +8,9 @@
 	    echo "This shouldn't have happened!";
 	}
 ?>
+
+<html>
+ Choose Image : <input name="img" size="35" type="file"/><br/>
+ <input type="submit" name="submit" value="Upload"/>
+</form>
+</html>
