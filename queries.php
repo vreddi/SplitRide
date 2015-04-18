@@ -46,7 +46,7 @@ error_reporting(E_ALL | E_STRICT);
                 break;
 
         case 'get_user_details':
-                break:
+                break;
 
         case 'get_cost':
                 break;       
@@ -153,7 +153,8 @@ error_reporting(E_ALL | E_STRICT);
           } 
          }
         }
-        echo "<img src = \"".$URL."\">";
+        echo "<img src = \"".$url."\">";
+        echo "".$url;
       }
 
 

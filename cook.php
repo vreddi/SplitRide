@@ -10,6 +10,7 @@
 ?>
 
 <html>
+<form action="queries.php?q=upload_profile_pic" enctype="multipart/form-data" method="POST">
  Choose Image : <input name="img" size="35" type="file"/><br/>
  <input type="submit" name="submit" value="Upload"/>
 </form>
