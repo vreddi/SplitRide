@@ -6,8 +6,7 @@ error_reporting(E_ALL | E_STRICT);
 if(!isset($_COOKIE['user'])) {
     echo "Cookie named '" . $cookie_name . "' is not set!";
 } else {
-    echo "Cookie '" . $cookie_name . "' is set!<br>";
-    echo "Value is: " . $_COOKIE[$cookie_name];
+    header( 'splitride.web.engr.illinois.edu/cook.php' ) ;
 }
 
 
