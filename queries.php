@@ -6,6 +6,7 @@ Query is a different function of request in the file.
 */
 
 
+
 //setting cookies if validating user
 if($_REQUEST['q']=='validate_user')
 {
@@ -23,6 +24,33 @@ error_reporting(E_ALL | E_STRICT);
     
     //determine the which query to form
     $query_func = $_REQUEST['q'];
+    $id_func = $_REQUEST['id'];
+
+    switch($id_func){
+        case '0':
+            break;
+        /*case '1':
+
+            //Testing Function (Vishrut)
+            echo "Vishrut: <br>"
+            getUserProfilePic(1);
+
+            //Testing Function (Anurag)
+            echo "Vishrut: <br>"
+            getUserName(1);
+
+            //Testing Function (Praful)
+            echo "Vishrut: <br>"
+            getTrip(1);
+
+            break;
+    */
+        default: 
+            echo "Failed to capture ID";
+            break;
+
+    }
+
     switch ($query_func) {
     	case 'add_user':
     		addUser($_POST['first_name'], $_POST['last_name'], $_POST['email'], md5($_POST['password']));
@@ -89,7 +117,7 @@ error_reporting(E_ALL | E_STRICT);
     function validateLogin($username, $password){   
 
 
-	   echo "(Verification Data for Initial Demo:) Username:".$username."\tPassword:".$password;
+	    echo "(Verification Data for Initial Demo:) Username:".$username."\tPassword:".$password;
 
         $query = "SELECT * FROM Users WHERE Email ='".$username."' AND Password = '".$password."';" ;
                         
@@ -113,7 +141,131 @@ error_reporting(E_ALL | E_STRICT);
 	
         }
 
+        getUserProfilePic(1);
+
+        getTrip(1);
+
+        getUserName(1);
+
+        getUserID('vishrutreddi@gmail.com');
+
     }
+
+    /**
+    * Description: Given a UserID this function finds the URL of the User's
+    * Profile Pictures and truens the link.
+    *
+    * @param userID
+    */
+    function getUserProfilePic($userID){
+
+        $query = "SELECT URL FROM Pictures WHERE UserID = '".$userID."';";
+
+        $res = mysqli_query(getConnection(), $query);
+
+        $pictureURL = "";
+        if(mysqli_num_rows($res) >= 1){
+            echo "<h1><pre>";
+            while($row = $res->fetch_array())
+            {
+                $pictureURL = $row['URL'];
+                echo "Pricture URL: <img src=\"".$row['URL']."\">";
+                echo "<br />";
+            }
+            echo "</pre></h1>";
+        }
+        else{
+            echo "Picture ID does not exist";
+        }
+
+        return $pictureURL;
+    }
+
+
+    function getUserID($username) {
+       $query = "SELECT UserID FROM Users WHERE Email = '".$username."';";
+       $res = mysqli_query(getConnection(),$query);
+       $return_data="";
+       if(mysqli_num_rows($res) >=1) {
+          echo "<h1><pre>";
+          while($row = $res->fetch_array())
+              {
+                  $return_data = $row['UserID'];
+                  echo "UserID is".$return_data;
+                  
+              }
+          echo "</pre></h1>";    
+          return $return_data;    
+           }
+           
+       else {
+            echo "NO results found";
+        }     
+       
+   
+    }
+
+
+    function getTrip() {
+        $query = "SELECT * FROM Trips ORDER BY TripTimeStamp DESC;";
+        $res = mysqli_query(getConnection(),$query);
+        $return_trip = "";
+        if(mysqli_num_rows($res) >=1) {
+            echo "<h1><pre>";
+            while($row = $res->fetch_array()) {
+                $source = $row['Source'];
+                $destination = $row['Destination'];
+                $timeStamp = $row['TripTimeStamp'];
+                echo "Trip :".$source."->".$destination." Time: ".$timeStamp;
+                echo "</pre></h1>";
+                echo "<h1><pre>";
+            }
+            echo "</pre></h1>";
+            return $return_trip; 
+        }
+        else {
+            echo "NO results found";
+        }   
+    }
+
+
+    /**
+    * Description: This function prints and returns a tuple consisting of First name and Last Name
+    * @param userID 
+    */ 
+    function getUserName($userID)
+    {
+
+        $query = "SELECT FirstName, LastName FROM Users WHERE UserID ='".$userID."';";
+                        
+        $res = mysqli_query(getConnection(), $query);
+        $Fullname="";
+        
+        if(mysqli_num_rows($res) >= 1){
+            echo "<h1><pre>";
+            while($row = $res->fetch_array())
+            {
+                $firstname = $row['FirstName'];
+                
+                $lastname = $row['LastName'];
+                $Fullname = $firstname.$lastname;
+                echo $Fullname;
+                
+                echo "<br />";
+            }
+
+        }
+        return $Fullname;
+    }
+
+
+
+
+
+
+
+
+
 
     /**
     * Description: This function uploads the picture that the user provides to imgur 
@@ -155,13 +307,17 @@ error_reporting(E_ALL | E_STRICT);
         }
         echo "<img src = \"".$url."\">";
         echo "".$url;
+
+        $userID = getUserName($username);
+        echo $username;
+        $query = "INSERT INTO Pictures Values ('".$userID."','".$url."');";
+                        
+        $res = mysqli_query(getConnection(), $query);
+        echo $res;
       }
 
 
 
-    function getTrip() {
-
-    }
 
     function getTripComment() {
 
