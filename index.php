@@ -3,18 +3,13 @@
 ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
 
-<<<<<<< Updated upstream
+
+
 if(!isset($_COOKIE['user'])) {
     echo "Cookie named '" . $cookie_name . "' is not set!";
 } else {
-    header( 'Location: splitride.web.engr.illinois.edu/cook.php' ) ;
-=======
-$cookie_name='user';
-if(!isset($_COOKIE['user'])) {
-    echo "Cookie named '" . $cookie_name . "' is not set!";
-} else {
-    header( 'https://splitride.web.engr.illinois.edu/cook.php' ) ;
->>>>>>> Stashed changes
+    header('Location: https://splitride.web.engr.illinois.edu/cook.php' ) ;
+
 }
 
 
