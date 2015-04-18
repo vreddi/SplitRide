@@ -1,12 +1,12 @@
 <?php
+
 ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
-
 
 if(!isset($_COOKIE['user'])) {
     echo "Cookie named '" . $cookie_name . "' is not set!";
 } else {
-    header( 'splitride.web.engr.illinois.edu/cook.php' ) ;
+    header( 'Location: splitride.web.engr.illinois.edu/cook.php' ) ;
 }
 
 
