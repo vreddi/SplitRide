@@ -11,6 +11,11 @@ Licensed under MIT
 
 	<link href="../css/feedStyles.css" rel="stylesheet">
 	<link href="../css/sr_profilePage-style.css" rel="stylesheet">
+
+	<!--Sweet Alert Files-->
+	<script src="../resources/sweetalert-master/dist/sweetalert.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="../resources/sweetalert-master/dist/sweetalert.css">
+
 </head>
 <body>
 
@@ -55,13 +60,12 @@ Licensed under MIT
 				<div class="profile-sidebar">
 					<!-- SIDEBAR USERPIC -->
 					<div class="profile-userpic">
-						<img src="http://keenthemes.com/preview/metronic/theme/assets/admin/pages/media/profile/profile_user.jpg" class="img-responsive" alt="">
+						<img src="" class="img-responsive" alt="">
 					</div>
 					<!-- END SIDEBAR USERPIC -->
 					<!-- SIDEBAR USER TITLE -->
 					<div class="profile-usertitle">
 						<div class="profile-usertitle-name">
-							Marcus Doe
 						</div>
 						<div class="profile-usertitle-job">
 							Driver/Rider
@@ -98,61 +102,112 @@ Licensed under MIT
 				</div>
 			</div>
 
+
+			<!-- Content Area -->
 			<div class="col-md-9 ">
 	            <div class="profile-content">
-				   <h3 id="profile-trips-title"> Trips Involved In: </h3>
 
-				   <!-- Trip Item -->
-	              <div class="panel panel-default">
+	            	
+    <h1>Edit Profile</h1>
+  	<hr>
+	<div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+          <h6>Upload a different photo...</h6>
+          
+          <form action="/queries.php?q=upload_profile_pic" enctype="multipart/form-data" method="POST">
+ Choose Image : <input name="img" size="35" type="file"/><br/>
+ <input type="submit" name="submit" value="Upload"/>
+</form>
+        </div>
+      </div>
+      
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a> 
+          <i class="fa fa-coffee"></i>
+          This is an <strong>.alert</strong>. Use this to show important messages to the user.
+        </div>
+        <h3>Personal info</h3>
+        
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-lg-3 control-label">First name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="Jane">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Last name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="Bishop">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Company:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="janesemail@gmail.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Time Zone:</label>
+            <div class="col-lg-8">
+              <div class="ui-select">
+                <select id="user_time_zone" class="form-control">
+                  <option value="Hawaii">(GMT-10:00) Hawaii</option>
+                  <option value="Alaska">(GMT-09:00) Alaska</option>
+                  <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+                  <option value="Arizona">(GMT-07:00) Arizona</option>
+                  <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+                  <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
+                  <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+                  <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Username:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="text" value="janeuser">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Password:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="password" value="11111122333">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Confirm password:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="password" value="11111122333">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+              <input type="button" class="btn btn-primary" value="Save Changes">
+              <span></span>
+              <input type="reset" class="btn btn-default" value="Cancel">
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
 
-	                <div class="panel-heading">
-	                  <img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/7/005/089/3b2/14dc93d.jpg" class="profile-image img-circle pull-left" style="margin-top: 0px; height: 70px; width: 70px"></a>
-	                  <a href="#" class="pull-right">View Trip</a> <h4 style="margin-left: 90px;">CHM -> CHI <br> <div style="font-size: 30px;">9:30 AM</div></h4>
-	                </div>
+<hr>
 
-	                <div class="panel-body">
-	                  <img src="http://www.cresa.com/webfiles/Chicago/ChicagoSkyline1.jpg" class="thumbnail text-center" style="width: 500px; height: auto;">
-	                  <div class="clearfix"></div>
-
-	                  <!-- Comment Section for Trip -->
-	                  <form>
-	                    <div class="input-group">
-	                      <div class="input-group-btn">
-	                        <button class="btn btn-default">+1</button><button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
-	                      </div>
-	                      <input type="text" class="form-control" placeholder="Add a comment..">
-	                    </div>
-	                  </form>
-
-	                </div>
-	              </div> 
-	              <!-- Trip Item End --> 
-
-	              <!-- Trip Item -->
-	              <div class="panel panel-default">
-
-	                <div class="panel-heading">
-	                  <img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/7/005/089/3b2/14dc93d.jpg" class="profile-image img-circle pull-left" style="margin-top: 0px; height: 70px; width: 70px"></a>
-	                  <a href="#" class="pull-right">View Trip</a> <h4 style="margin-left: 90px;">CHM -> CHI <br> <div style="font-size: 30px;">9:30 AM</div></h4>
-	                </div>
-
-	                <div class="panel-body">
-	                  <img src="http://www.cresa.com/webfiles/Chicago/ChicagoSkyline1.jpg" class="thumbnail text-center" style="width: 500px; height: auto;">
-	                  <div class="clearfix"></div>
-
-	                  <!-- Comment Section for Trip -->
-	                  <form>
-	                    <div class="input-group">
-	                      <div class="input-group-btn">
-	                        <button class="btn btn-default">+1</button><button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
-	                      </div>
-	                      <input type="text" class="form-control" placeholder="Add a comment..">
-	                    </div>
-	                  </form>
-
-	                </div>
-	              </div> 
-	              <!-- Trip Item End --> 
+	              
 	            </div>
 			</div>
 
@@ -163,5 +218,11 @@ Licensed under MIT
 	<br>
 	<br>
 
+
+	<!-- script references -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script src="../resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+	<!-- Attaching Script File -->
+	<script src="../js/sr_profile-script.js"></script> 
 </body>
 </html>

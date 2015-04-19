@@ -1,6 +1,8 @@
 <?php
+	
+?>
 
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 	<head>
@@ -33,6 +35,9 @@
 
     	<link href="../css/feedStyles.css" rel="stylesheet">
 		<link href="../css/sr_planATrip-style.css" rel="stylesheet">
+
+		<script src="../resources/sweetalert-master/dist/sweetalert.min.js"></script> 
+		<link rel="stylesheet" type="text/css" href="../resources/sweetalert-master/dist/sweetalert.css">
 		 
 
 	</head>
@@ -99,7 +104,7 @@
 							 	</div>
 							  	<div class="panel-body">
 							    	
-							    	<form accept-charset="UTF-8" role="form" method="post" action="/queries.php?q=plan_trip">
+							    	<form accept-charset="UTF-8" role="form">
 				                    <fieldset>
 							    	  	<div class="form-group">
 							    		    <input id="autocomplete" class="form-control" id="exampleInputName2"  placeholder="Enter the Source"  type="text" name="source" required></input>
@@ -126,7 +131,7 @@
 										</div>
 							    		
 							    
-							    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Post Trip">
+							    		<input onclick="sumbitTrip(event)" class="btn btn-lg btn-success btn-block" type="submit" value="Post Trip">
 							    	</fieldset>
 							      	</form>
 

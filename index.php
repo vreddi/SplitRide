@@ -1,17 +1,16 @@
 <?php
+    $cookie_name = 'userID';
+    if(!isset($_COOKIE['userID'])) {
 
-    $cookie_name = 'user';
-
-    if(!isset($_COOKIE['user'])) {
-        echo "Cookie named '" . $cookie_name . "' is not set!";
     } else {
-        header('Location: cook.php' ) ;
-
+        header('Location: pages/sr_homePage.php' );
     }
 ?>
 
 <!DOCTYPE html>
 <html>
+
+
 
 <head>
     <title>Login - SplitRide</title>

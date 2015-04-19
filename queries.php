@@ -5,20 +5,15 @@ DESCRIPTION: Used for all the different kinds of queries the SplitRide applicati
 Query is a different function of request in the file.
 */
 
-//setting cookies if validating user
-if($_REQUEST['q']=='validate_user')
-{
-    $cookie_name = "user";
-    $cookie_value = $_POST['username'];
-    setcookie($cookie_name, $cookie_value, time() + (300), "/"); // 86400 = 1 day
-}
+
+//Connect Connection Script
+include("connection.php");
 
 
 ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
    
-    //Connect Connection Script
-    include("connection.php");
+    
     
     //determine the which query to form
     $query_func = $_REQUEST['q'];
@@ -28,26 +23,49 @@ error_reporting(E_ALL | E_STRICT);
     		addUser($_POST['first_name'], $_POST['last_name'], $_POST['email'], md5($_POST['password']));
     		break;
         case 'validate_user':
+                
                 $encrip_password = md5($_POST['password']);
                 validateLogin($_POST['username'], $encrip_password);
                 break;
 
         case 'get_profile_pic':
-                getUserProfilePic($_SESSION['id']);
+                getUserProfilePic($_COOKIE['userID']);
                 break;
+
         case 'upload_profile_pic':
-                upload_pp($_COOKIE['user']);
+                upload_pp($_COOKIE['userID']);
                 break;
         
         case 'get_user_name':
-                getUserName($_SESSION['id']);
+                getUserName($_COOKIE['userID']);
                 break;  
+
+        case 'plan_trip':
+                $dateTimeStamp = $_POST['date']." ".$_POST['time'].":00";
+                // echo $dateTimeStamp;
+                $added = addTripDetails($dateTimeStamp, $_POST['source'], $_POST['destination'], $_POST['seats'], $_COOKIE['userID'], $_POST['notes']);
+                
+                header('Location: /pages/sr_homePage.php');
+
+                break;
+
+
+        case 'logout':
+                deleteCookie();
+                break;
 
     	default:
     		# code...
     		break;
     }
     
+    /**
+    *Description: This function deletes the cookies for USERID
+    */
+    function deleteCookie()
+    {
+        setcookie("userID", "", -3600);
+    }
 
     /**
     * Description: This function is used to add a user to the database. THe data is added to the 'Users'
@@ -84,12 +102,16 @@ error_reporting(E_ALL | E_STRICT);
 	
 
         if(mysqli_num_rows($res) >= 1){
-            session_start();
-            $_SESSION['id'] = getUserID($username);
-            $_SESSION['username'] = $username;
 
+            //setting cookies if validating user
+            if($_REQUEST['q']=='validate_user')
+            {
+                $cookie_name = "userID";
+                $cookie_value = getUserID($_POST['username']);
+                setcookie($cookie_name, $cookie_value, time() + (86400), "/"); // 86400 = 1 day
+            }
 
-            header('Location: pages/sr_homePage.html');
+            header('Location: pages/sr_homePage.php');
             exit();
             // echo "<h1><pre>";
             // echo "Login Successful! :)";
@@ -128,21 +150,21 @@ error_reporting(E_ALL | E_STRICT);
 
         $res = mysqli_query(getConnection(), $query);
 
-        $pictureURL = "";
+        $pictureURL = "http://farm8.static.flickr.com/7085/7201237400_9f2a686a92_m.jpg";
         if(mysqli_num_rows($res) >= 1){
             //echo "<h1><pre>";
             while($row = $res->fetch_array())
             {
                 $pictureURL = $row['URL'];
-                //echo "Pricture URL: <img src=\"".$row['URL']."\">";
-                //echo "<br />";
+                // echo "Pricture URL: <img src=\"".$row['URL']."\">";
+                // echo "<br />";
             }
             //echo "</pre></h1>";
         }
         else{
             //echo "Picture ID does not exist";
         }
-        echo $query_func($pictureURL);
+        echo $pictureURL;
         return $pictureURL;
     }
 
@@ -154,19 +176,19 @@ error_reporting(E_ALL | E_STRICT);
        $res = mysqli_query(getConnection(),$query);
        $return_data="";
        if(mysqli_num_rows($res) >=1) {
-          echo "<h1><pre>";
+          //echo "<h1><pre>";
           while($row = $res->fetch_array())
               {
                   $return_data = $row['UserID'];
-                  echo "UserID is".$return_data;
+                  //echo "UserID is".$return_data;
                   
               }
-          echo "</pre></h1>";    
+          //echo "</pre></h1>";    
           return $return_data;    
            }
            
        else {
-            echo "NO results found";
+            //echo "NO results found";
         }     
        
    
@@ -209,34 +231,353 @@ error_reporting(E_ALL | E_STRICT);
         $Fullname="";
         
         if(mysqli_num_rows($res) >= 1){
-            echo "<h1><pre>";
             while($row = $res->fetch_array())
             {
-                $firstname = $row['FirstName'];
-                
+                $firstname = $row['FirstName'];             
                 $lastname = $row['LastName'];
-                $Fullname = $firstname.$lastname;
-                echo $Fullname;
+                $Fullname = $firstname." ".$lastname;
                 
-                echo "<br />";
             }
 
         }
+        echo $Fullname;
         return $Fullname;
     }
+
+
+
+    // /**
+    //     * Description: This function gets the Driverid from TripID.
+    //     * @param tripid 
+    //     */ 
+    // function getDriverfromTrip($tripid) {
+    //     $query = "SELECT DriverID FROM Drives WHERE TripID = '.$tripid.';";
+    //     $res = mysqli_query(getConnection(),$query);
+    //     $driverid = 0;
+    //     if(mysqli_num_rows($res) >=1) {
+    //         while($row = $res->fetch_array()) {
+    //             $driverid = $row['DriverID'];
+    //             echo "DriverID: ".$driverid;
+    //         }
+    //         clearConnection();
+    //         return $driverid;
+    //         /*
+    //         $vehicle = getDriver_vehicle($driverid);
+    //         $trips = getDriver_trips($driverid);
+    //         $cancel = getDriver_cancel($driverid);
+    //         return array($driverid,$vehicle,$trips,$cancel);
+    //         */
+    //     }
+    //     else {
+    //         echo "No results found";
+    //     }    
+    // }
+
+    // /**
+    //     * Description: This function gets the vehicle information for a specific driver from Driverid.
+    //     * @param driverid 
+    //     */
+    // function getDriver_vehicle($driverid) {
+    //     $query = "SELECT Vehicle FROM Drivers WHERE UserID = '.$driverid.';";
+    //     $res = mysqli_query(getConnection(),$query);
+    //     $vehicle = "";
+    //     if(mysqli_num_rows($res) >=1) {
+            
+    //         while($row = $res->fetch_array()) {
+    //             $vehicle = $row['Vehicle'];
+    //             echo "Vehicle ".$vehicle;
+    //         }
+    //         clearConnection();
+    //         return $vehicle; 
+    //     }
+    //     else {
+    //         echo "NO results found";
+    //         }
+        
+    //     }
+    // /**
+    //     * Description: This function gets the number of trips for a specific driver from Driverid.
+    //     * @param driverid 
+    //     */
+    // function getDriver_trips($driverid) {
+    //     $query = "SELECT NoOfTrips FROM Drivers WHERE UserID = '.$driverid.';";
+    //     $res = mysqli_query(getConnection(),$query);
+    //     $trips = "";
+    //     if(mysqli_num_rows($res) >=1) {
+                
+    //         while($row = $res->fetch_array()) {
+    //             $trips = (string)$row['NoOfTrips'];
+    //             echo "Trips no: ".$cancel;
+    //         }
+    //         clearConnection();
+    //         return $trips; 
+    //     }
+    //     else {
+    //         echo "NO results found";
+    //     }
+        
+    // }
+
+    // /**
+    //     * Description: This function gets the number of cancellations for a specific driver from Driverid.
+    //     * @param driverid 
+    //     */    
+    // function getDriver_cancel($driverid) {
+    //         $query = "SELECT NoOfCancellations FROM Drivers WHERE UserID = '.$driverid.';";
+    //         $res = mysqli_query(getConnection(),$query);
+    //         $cancel = "";
+    //         if(mysqli_num_rows($res) >=1) {
+                
+    //             while($row = $res->fetch_array()) {
+    //                 $cancel = (string)$row['NoOfCancellations'];
+    //                 echo "Cancellation no: ".$cancel;
+    //             }
+    //             clearConnection();
+    //             return $cancel; 
+    //         }
+    //         else {
+    //             echo "NO results found";
+    //         }
+        
+    //     }
+    // /**
+    //     * Description: This function gets the AuthorID for a specific comment of a given trip, by TripID.
+    //     * @param tripid 
+    //     */
+    // function getTripCom_author($tripid) {
+    //     $query = "SELECT AuthorID FROM TripComments WHERE TripID = '.$tripid.' ORDER BY CommentTimeStamp DESC;";
+    //     $res = mysqli_query(getConnection(),$query);
+    //     $authors = [];
+    //     if(mysqli_num_rows($res) >= 1) {
+    //         while($row = $res->fetch_array()){
+    //             array_push($authors, array('AuthorID' => $row['AuthorID']);
+    //             echo "Author ID".$row['AuthorID'];
+    //         }
+    //         clearConnection();
+    //         return $authors;
+    //     }
+    //     else {
+    //         echo "No results";
+    //     }
+    // }
+
+    // /**
+    //     * Description: This function gets the time stamp for a specific comment of a given trip, by TripID.
+    //     * @param tripid 
+    //     */
+    // function getTripCom_time($tripid) {
+    //     $query = "SELECT CommentTimeStamp FROM TripComments WHERE TripID = '.$tripid.' ORDER BY CommentTimeStamp DESC;";
+    //     $res = mysqli_query(getConnection(),$query);
+    //     $time = [];
+    //     if(mysqli_num_rows($res) >= 1) {
+    //         while($row = $res->fetch_array()){
+    //             array_push($time, array('CommentTimeStamp' => $row['CommentTimeStamp']);  
+    //             echo "CommentTimeStamp: ".$row['CommentTimeStamp'];
+    //         }
+    //         clearConnection();
+    //         return $time;
+    //     }
+    //     else {
+    //         echo "No results";
+    //     }
+    // }
+
+    // /**
+    //     * Description: This function gets the specific comment of a given trip, by TripID.
+    //     * @param tripid 
+    //     */
+    // function getTrip_Com($tripid) {
+    //     $query = "SELECT Text FROM TripComments WHERE TripID = '.$tripid.' ORDER BY CommentTimeStamp DESC;";
+    //     $res = mysqli_query(getConnection(),$query);
+    //     $comments = [];
+    //     if(mysqli_num_rows($res) >= 1) {
+    //         while($row = $res->fetch_array()){
+    //             array_push($comments, array('Text' => $row['Text']); 
+    //             echo "Text: ".$row['Text'];
+    //         }
+    //         clearConnection();
+    //         return $comments;
+    //     }
+    //     else {
+    //         echo "No results";
+    //     }
+    // }
+
+    // /**
+    //     * Description: This function gives the list of FriendID of a given user by userID.
+    //     * @param tripid 
+    //     */
+    // function getFriendID($userid) {
+    //     $query = "SELECT FriendID FROM Friends WHERE UserID = '.$userid.';";
+    //     $res = mysqli_query(getConnection(),$query);
+    //     $friends = [];
+    //     if(mysqli_num_rows($res) >= 1) {
+    //         while($row = $res->fetch_array()){
+    //             array_push($friends, array('FriendID' => $row['FriendID']);
+    //             echo "FriendID: ".$row['FriendID'];
+    //         }
+    //         clearConnection();
+    //         return $friends;
+    //     }
+    //     else {
+    //         echo "No results";
+    //     }
+    // }
+
+
+    
+     /**
+    * Description: This function returns the number of seats remaining 
+    * @param $tripID
+    * @return $seatsRemaining
+    */ 
+
+    function returnNoOfSeats($tripID)
+    {
+        $seatsRemaining = 0;
+        $query = "SELECT NoOfSeats FROM Trips WHERE TripID = $tripID";
+        $res = mysqli_query(getConnection(), $query);
+        if(mysqli_num_rows($res) >= 1)
+            $row = $res->fetch_array();
+
+        $seatsRemaining= $row['NoOfSeats'];
+        return $seatsRemaining;
+    }
+
+
+/**
+    * Description: This function adds a passenger to the Trip and returns True if it were possible
+    * @param $passID
+    * @param $tripID
+    * @return true or false
+    */ 
+    function addPassengerToTrip($passID, $tripID)
+    {
+        
+            $query = "INSERT into Rides VALUES ('$passID' , '$tripID');";
+            $res = mysqli_query(getConnection(), $query);
+            if($res == true)
+            {
+                
+                return true;
+
+            }
+            else
+                {   echo "can't enter passid!!"; 
+                    return false;
+                }
+
+        
+
+    }
+
+    /**
+    * Description: This function allows a passenger to leave the Trip and returns True if it were possible
+    * @param $passID
+    * @param $tripID
+    * @return true or false
+    */ 
+    function leaveTrip($passID, $tripID)
+    {
+        $query = "DELETE FROM Rides WHERE PassengerID = $passID AND TripID = $tripID;";
+        $res = mysqli_query(getConnection(), $query);
+            if($res == true)
+            {
+
+                return true;
+
+            }
+            else
+                { 
+                    echo "can't remove passen7ger!"; 
+                    return false;
+                }
+    }
+
+    /**
+    * Description: This function checks if the user is the driver of the Trip and returns True if he is
+    * @param $userID
+    * @param $tripID
+    * @return true or false
+    */ 
+    function checkDriver($userID, $tripID)
+    {
+        $query = "SELECT DriverID FROM Trips where TripID = $tripID;";
+        $res = mysqli_query(getConnection(), $query);
+        if($res==false)
+            {echo "Unexpected error! TripID doesn't exist!";return false;}
+        if(mysqli_num_rows($res) >= 1)
+            $row = $res->fetch_array();
+        else
+        {
+            echo "Unexpected error! TripID doesn't exist!";
+            return false;
+        }
+
+        $DriverID= $row['DriverID'];
+        if($DriverID==$userID)
+        { return true;
+  
+        }
+    }
+
+
+    /**
+    * Description: This function allows the driver to leave the Trip and returns true if possible
+     * @param $userID
+    * @param $tripID
+    * @return   true or false
+    */ 
+    function cancelTrip($userID, $tripID)
+    {
+            $query = "DELETE FROM Trips WHERE TripID = $tripID;";
+            $res = mysqli_query(getConnection(), $query);
+            if($res==false)
+            {
+                echo "Unexpected error! TripID doesn't exist!";
+                return false;
+            }
+            else
+                return true;
+
+    }
+     /**
+    * Description: This function removes a passenger from Rides and returns true if possible
+     * @param $passID
+    * @param $tripID
+    * @return  true or false
+    */ 
+    function removePassenger($passID, $tripID)
+    {
+        $query = "DELETE FROM Rides WHERE PassengerID = $passID;";
+            $res = mysqli_query(getConnection(), $query);
+            if($res==false)
+            {
+                echo "Unexpected error!";
+                return false;
+            }
+            else
+                return true;
+    }
+
+
+
+
+
 
 
     /**
     * Description: This function uploads the picture that the user provides to imgur 
     * and then saves the url generated to the database
     * @param username (generated from the cookies)
+    * TESTED - OK
     */
     function upload_pp($username) {
         $img=$_FILES['img'];
         $url = "";
             if(isset($_POST['submit'])){ 
              if($img['name']==''){  
-              echo "<h2>An Image Please.</h2>";
+              // echo "<h2>An Image Please.</h2>";
              }else{
               $filename = $img['tmp_name'];
               $client_id="0de23ade0aa4f95";
@@ -256,262 +597,156 @@ error_reporting(E_ALL | E_STRICT);
               $pms = json_decode($out,true);
               $url=$pms['data']['link'];
               if($url!=""){
-               echo "<h2>Uploaded Without Any Problem</h2>";
-               echo "<img src='$url'/>";
+               // echo "<h2>Uploaded Without Any Problem</h2>";
+               // echo "<img src='$url'/>";
               }else{
-               echo "<h2>There's a Problem</h2>";
-               echo $pms['data']['error'];  
+               // echo "<h2>There's a Problem</h2>";
+               //echo $pms['data']['error'];  
           } 
          }
         }
-        echo "<img src = \"".$url."\">";
-        echo "".$url;
+        //echo "<img src = \"".$url."\">";
+        // echo "".$url;
 
-        $userID = getUserName($username);
-        echo $username;
-        //$query = "INSERT INTO Pictures Values ('".$userID."','".$url."');";
+        $userID = $_COOKIE['userID'];
+        // echo $username;
         $query = "INSERT INTO Pictures Values ('$userID','$url');";
+                        
         $res = mysqli_query(getConnection(), $query);
-        echo $res;
       }
 
 
 
-    /**
-        * Description: This function gets the Driverid from TripID.
-        * @param tripid 
-        */ 
-    function getDriverfromTrip($tripid) {
-        $query = "SELECT DriverID FROM Drives WHERE TripID = '.$tripid.';";
-        $res = mysqli_query(getConnection(),$query);
-        $driverid = 0;
-        if(mysqli_num_rows($res) >=1) {
-            while($row = $res->fetch_array()) {
-                $driverid = $row['DriverID'];
-                echo "DriverID: ".$driverid;
-            }
-            clearConnection();
-            return $driverid;
-            /*
-            $vehicle = getDriver_vehicle($driverid);
-            $trips = getDriver_trips($driverid);
-            $cancel = getDriver_cancel($driverid);
-            return array($driverid,$vehicle,$trips,$cancel);
-            */
-        }
-        else {
-            echo "No results found";
-        }    
-    }
-
-    /**
-        * Description: This function gets the vehicle information for a specific driver from Driverid.
-        * @param driverid 
-        */
-    function getDriver_vehicle($driverid) {
-        $query = "SELECT Vehicle FROM Drivers WHERE UserID = '.$driverid.';";
-        $res = mysqli_query(getConnection(),$query);
-        $vehicle = "";
-        if(mysqli_num_rows($res) >=1) {
-            
-            while($row = $res->fetch_array()) {
-                $vehicle = $row['Vehicle'];
-                echo "Vehicle ".$vehicle;
-            }
-            clearConnection();
-            return $vehicle; 
-        }
-        else {
-            echo "NO results found";
-            }
-        
-        }
-    /**
-        * Description: This function gets the number of trips for a specific driver from Driverid.
-        * @param driverid 
-        */
-    function getDriver_trips($driverid) {
-        $query = "SELECT NoOfTrips FROM Drivers WHERE UserID = '.$driverid.';";
-        $res = mysqli_query(getConnection(),$query);
-        $trips = "";
-        if(mysqli_num_rows($res) >=1) {
-                
-            while($row = $res->fetch_array()) {
-                $trips = (string)$row['NoOfTrips'];
-                echo "Trips no: ".$cancel;
-            }
-            clearConnection();
-            return $trips; 
-        }
-        else {
-            echo "NO results found";
-        }
-        
-    }
-
-    /**
-        * Description: This function gets the number of cancellations for a specific driver from Driverid.
-        * @param driverid 
-        */    
-    function getDriver_cancel($driverid) {
-            $query = "SELECT NoOfCancellations FROM Drivers WHERE UserID = '.$driverid.';";
-            $res = mysqli_query(getConnection(),$query);
-            $cancel = "";
-            if(mysqli_num_rows($res) >=1) {
-                
-                while($row = $res->fetch_array()) {
-                    $cancel = (string)$row['NoOfCancellations'];
-                    echo "Cancellation no: ".$cancel;
-                }
-                clearConnection();
-                return $cancel; 
-            }
-            else {
-                echo "NO results found";
-            }
-        
-        }
-    /**
-        * Description: This function gets the AuthorID for a specific comment of a given trip, by TripID.
-        * @param tripid 
-        */
-    function getTripCom_author($tripid) {
-        $query = "SELECT AuthorID FROM TripComments WHERE TripID = '.$tripid.' ORDER BY CommentTimeStamp DESC;";
-        $res = mysqli_query(getConnection(),$query);
-        $authors = [];
-        if(mysqli_num_rows($res) >= 1) {
-            while($row = $res->fetch_array()){
-                array_push($authors, array('AuthorID' => $row['AuthorID']);
-                echo "Author ID".$row['AuthorID'];
-            }
-            clearConnection();
-            return $authors;
-        }
-        else {
-            echo "No results";
-        }
-    }
-
-    /**
-        * Description: This function gets the time stamp for a specific comment of a given trip, by TripID.
-        * @param tripid 
-        */
-    function getTripCom_time($tripid) {
-        $query = "SELECT CommentTimeStamp FROM TripComments WHERE TripID = '.$tripid.' ORDER BY CommentTimeStamp DESC;";
-        $res = mysqli_query(getConnection(),$query);
-        $time = [];
-        if(mysqli_num_rows($res) >= 1) {
-            while($row = $res->fetch_array()){
-                array_push($time, array('CommentTimeStamp' => $row['CommentTimeStamp']);  
-                echo "CommentTimeStamp: ".$row['CommentTimeStamp'];
-            }
-            clearConnection();
-            return $time;
-        }
-        else {
-            echo "No results";
-        }
-    }
-
-    /**
-        * Description: This function gets the specific comment of a given trip, by TripID.
-        * @param tripid 
-        */
-    function getTrip_Com($tripid) {
-        $query = "SELECT Text FROM TripComments WHERE TripID = '.$tripid.' ORDER BY CommentTimeStamp DESC;";
-        $res = mysqli_query(getConnection(),$query);
-        $comments = [];
-        if(mysqli_num_rows($res) >= 1) {
-            while($row = $res->fetch_array()){
-                array_push($comments, array('Text' => $row['Text']); 
-                echo "Text: ".$row['Text'];
-            }
-            clearConnection();
-            return $comments;
-        }
-        else {
-            echo "No results";
-        }
-    }
-
-    /**
-        * Description: This function gives the list of FriendID of a given user by userID.
-        * @param tripid 
-        */
-    function getFriendID($userid) {
-        $query = "SELECT FriendID FROM Friends WHERE UserID = '.$userid.';";
-        $res = mysqli_query(getConnection(),$query);
-        $friends = [];
-        if(mysqli_num_rows($res) >= 1) {
-            while($row = $res->fetch_array()){
-                array_push($friends, array('FriendID' => $row['FriendID']);
-                echo "FriendID: ".$row['FriendID'];
-            }
-            clearConnection();
-            return $friends;
-        }
-        else {
-            echo "No results";
-        }
-    }
-
-
-     /**
-    * Description: This function adds a passenger to the Trip and returns True if it were possible
-    * @param $passID
-    * @param $tripID
-    * @return true or false
-    */ 
-
-    function addPassengerToTrip($passID, $tripID)
-    {
-        $seatsRemaining = 0;
-        $query = "SELECT NoOfSeats FROM Trips WHERE TripID = $tripID";
-        $res = mysqli_query(getConnection(), $query);
-        if(mysqli_num_rows($res) >= 1)
-            $row = $res->fetch_array();
-
-        $seatsRemaining= $row['NoOfSeats'];
-        if($seatsRemaining>0){
-
-            $query = "INSERT into Rides VALUES ('$passID' , '$tripID');";
-            $res = mysqli_query(getConnection(), $query);
-            if($res == true)
-            {
-                
-                return true;
-
-            }
-            else
-                { echo "can't enter passid!!"; return false;}
-
-        }
-        else
+        //Description: Function to add Trip Details
+        function addTripDetails($TripTimeStamp, $src, $dstn, $NoOfSeats, $userID, $notes)
         {
-            echo "No seats available!";
-            return false;
+            $query = "INSERT INTO Trips(DriverID,TripTimeStamp, Source, Destination, NoOfSeats, NoOfSeatsAvailable, Notes) Values ('$userID','$TripTimeStamp', '$src','$dstn', '$NoOfSeats', '$NoOfSeats', '$notes');";
+            $res = mysqli_query(getConnection(), $query);
+                if($res==false)
+                {
+                    //setting cookies if validating user
+                    $cookie_name = "trip_added";
+                    $cookie_value = 'false';
+                    setcookie($cookie_name, $cookie_value, time() + (3600), "/"); // 86400 = 1 day
+                    
+                    echo "Unexpected error!";
+                    return false;
+                }
+                else{
+
+                    //setting cookies if validating user
+                    $cookie_name = "trip_added";
+                    $cookie_value = 'true';
+                    setcookie($cookie_name, $cookie_value, time() + (3600), "/"); // 86400 = 1 day
+
+                    return true;
+                }
+                    
+
         }
 
-    }
+      //Following functions are used to modify/add user details
+    //-------------------------------------------------------
+    
 
-    /**
-    * Description: This function allows a passenger to leave the Trip and returns True if it were possible
-    * @param $passID
-    * @param $tripID
-    * @return true or false
-    */ 
-    function leaveTrip($passID, $tripID)
+    //Description: Change User Name
+    function changeUserName($UserID, $newName)
     {
-        $query = "DELETE FROM Rides WHERE PassengerID = $passID AND TripID = $tripID";
+        $query = "UPDATE Users SET FirstName = '$newName' where UserID = $UserID;";
         $res = mysqli_query(getConnection(), $query);
-            if($res == true)
+            if($res==false)
             {
-                return true;
-
+                echo "Unexpected error!";
+                return false;
             }
             else
-                { echo "can't remove passenger!"; return false;}
+                return true; 
     }
+    //Description: Change User About me
+    function changeUserAboutMe($UserID,$aboutMe)
+    {
+        $query = "UPDATE Users SET AboutMe = '$aboutMe' where UserID = $UserID;";
+        $res = mysqli_query(getConnection(), $query);
+            if($res==false)
+            {
+                echo "Unexpected error!";
+                return false;
+            }
+            else
+                return true;
+    }
+    //Description: Checks password
+    //@return Returns true if old pw matches new pw
+    function checkPassword($UserID,$oldpw, $newpw)
+    {
+        $oldPw = md5($oldPw);
+        $newPw = md5($newPw);
+        if($oldPw==$newPw)
+            return true;
+        else
+            return false;
+
+    }
+    //Description: Change Password
+    function changePassword($UserID,$newPw)
+    {
+        $newPw = md5($newPw);
+        $query = "UPDATE Users SET Password = '$newPw' where UserID = $UserID;";
+        $res = mysqli_query(getConnection(), $query);
+            if($res==false)
+            {
+                echo "Unexpected error!";
+                return false;
+            }
+            else
+                return true;
+    }
+
+    //Description: Change DOB of User
+    function changeDOB($UserID,$dob)
+    {
+        $query = "UPDATE Users SET DOB = '$dob' where UserID = $UserID;";
+        $res = mysqli_query(getConnection(), $query);
+            if($res==false)
+            {
+                echo "Unexpected error!";
+                return false;
+            }
+            else
+                return true;
+    }
+
+    //Description: Change User Gender
+    function changeGender($UserID,$gender)
+    {
+        $query = "UPDATE Users SET DOB = '$dob' where UserID = $UserID;";
+        $res = mysqli_query(getConnection(), $query);
+            if($res==false)
+            {
+                echo "Unexpected error!";
+                return false;
+            }
+            else
+                return true;
+    }
+
+    //Description: Change User Phone Number
+    function changePhno($UserID,$phno)
+    {
+            $query = "UPDATE Users SET Phone_No = '$phno' where UserID = $UserID;";
+            $res = mysqli_query(getConnection(), $query);
+            if($res==false)
+            {
+                echo "Unexpected error!";
+                return false;
+            }
+            else
+                return true;
+    }
+
+
+
+
 
 
 

@@ -1,3 +1,13 @@
+<?php
+    $cookie_name = 'userID';
+    if(isset($_COOKIE['userID'])) {
+        
+    } else {
+        header('Location: /index.php' );
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +21,59 @@
   	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
   <link href="../css/feedStyles.css" rel="stylesheet">
+
+    <script src="../resources/sweetalert-master/dist/sweetalert.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="../resources/sweetalert-master/dist/sweetalert.css">
 </head>
 	
 <body>
+
+  <script>
+    function getCookie(name) {
+      var dc = document.cookie;
+      var prefix = name + "=";
+      var begin = dc.indexOf("; " + prefix);
+      if (begin == -1) {
+          begin = dc.indexOf(prefix);
+          if (begin != 0) return null;
+      }
+      else
+      {
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+        end = dc.length;
+        }
+    }
+    return unescape(dc.substring(begin + prefix.length, end));
+  } 
+
+  
+  function showSuccessMssg(){
+
+    var addedTripCookie = getCookie("trip_added");
+
+    if(addedTripCookie != null){
+
+
+      //Success
+      if(addedTripCookie == "true"){
+
+        swal("Done!", "Trip Added!", "success")
+      }
+      //Failure
+      else{
+        swal({   title: "Oops!",   text: "Something Went Wrong! Try Again",   type: "error",   confirmButtonText: "Ok" });
+      }
+    }
+    document.cookie = 'trip_added=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
+
+   showSuccessMssg();
+  </script>
+
+
+
   <div class="wrapper">
     <div class="box">
       <div class="row row-offcanvas row-offcanvas-left">
@@ -32,10 +92,9 @@
 
               <!--<a href="/" class="navbar-brand logo">SplitRide</a>-->
             </div>
-            <img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/2/000/29b/0ea/3602fab.jpg" class="profile-image img-circle" style=" height: 130px; width: 130px; margin-top: 30px;"></a>
+            <img src="" class="profile-image img-circle" id="user-profile-pic" style=" height: 130px; width: 130px; margin-top: 30px;"></a>
 
             <div id="side-bar-trips-title" style="color: #bbb;">
-              Vishrut Reddi
             </div>
 
             <div id="side-bar-trips-title">
@@ -55,7 +114,7 @@
             <div class="msg"><img src="https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-xfp1/t31.0-8/1417660_10202428821390512_305950237_o.jpg" class="profile-image img-circle pull-left" style="height: 30px; width: 30px;">CHM -> CHI <div style="font-size: 20px;">9:30AM </div></div>
 
 
-            <a href="#" class="btn btn-lg btn-primary" style="width: 150px; bottom: 10px; left: 45px; position: absolute;">Logout</a>
+            <a class="btn btn-lg btn-primary" id="logout-btn" style="width: 150px; bottom: 10px; left: 45px; position: absolute;">Logout</a>
           </div>
         </div>
         <!-- /sidebar -->
@@ -116,7 +175,9 @@
                 </div>
 
                 <div class="panel-body">
-                  <img src="http://www.cresa.com/webfiles/Chicago/ChicagoSkyline1.jpg" class="thumbnail text-center" style="width: 500px; height: auto;">
+                  <img src="http://www.cresa.com/webfiles/Chicago/ChicagoSkyline1.jpg" class="thumbnail text-center pull-left" style="width: 150px; height: auto;">
+                  <img src="http://www.kravmagagilbert.com/wp-content/uploads/2014/08/arrow-39526_640.png" style="width: 100px; height: auto; margin-left: 12%; margin-top: 20px; border: ">
+                  <img src="http://www.cresa.com/webfiles/Chicago/ChicagoSkyline1.jpg" class="thumbnail text-center pull-right" style="width: 150px; height: auto;">
                   <div class="clearfix"></div>
 
                   <!-- Comment Section for Trip -->
@@ -223,6 +284,6 @@
 <!-- script references -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script src="../resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
-<script src="../js/feedScripts.js"></script>
+<script src="../js/sr_homePage-script.js"></script>
 </body>
 </html>

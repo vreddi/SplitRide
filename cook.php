@@ -1,6 +1,6 @@
 <?php
-	$cookie_name = 'user';
-	if(isset($_COOKIE['user'])) {
+	$cookie_name = 'userID';
+	if(isset($_COOKIE['userID'])) {
 	    echo "<h1> Hello, " . $_COOKIE[$cookie_name] . "</h1>";
 	    echo "Pretty neat, huh?";
 	} else {
