@@ -3,6 +3,7 @@ html, body {
    height: 100%;
    font-family:verdana,arial,sans-serif;
    color:#555555;
+   background: #F1F3FA;
 }
 
 .nav {

@@ -183,7 +183,9 @@ error_reporting(E_ALL | E_STRICT);
 
 
     function getUserID($username) {
-       $query = "SELECT UserID FROM Users WHERE Email = '".$username."';";
+    //$query = "SELECT UserID FROM Users WHERE Email = '".$username."';";
+        //Anurag : I made Life simple!
+        $query = "SELECT UserID FROM Users WHERE Email = '$username';";
        $res = mysqli_query(getConnection(),$query);
        $return_data="";
        if(mysqli_num_rows($res) >=1) {

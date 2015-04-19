@@ -1,0 +1,110 @@
+/*
+A custom Bootstrap 3.1 theme from http://bootply.com\
+
+This CSS code should follow the 'bootstrap.css'
+in your HTML file.
+
+license: MIT
+author: bootply.com
+*/
+
+-webkit-transition: .15s ease-in-out;
+-moz-transition: .15s ease-in-out;
+-o-transition: .15s ease-in-out;
+
+-webkit-transition-property: background-position;
+-moz-transition-property: background-position;
+-o-transition-property: background-position;
+
+transition: .3s ease-in-out;
+transition-property: background-position;
+
+html,body{
+  	height:100%;
+}
+
+body{
+    height: 100%;
+    margin: 0;
+}
+
+
+
+#parallax-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    background: url(http://mymaplist.com/img/parallax/back.png);
+    overflow: hidden;
+}
+.box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.box-1 {
+    background: url(http://mymaplist.com/img/parallax/pinlayer1.png);
+}
+.box-2 {
+    background: url(http://mymaplist.com/img/parallax/pinlayer2.png) ;
+
+}
+.box-3 {
+
+}
+
+
+
+
+
+.vertical-offset-100{
+    padding-top:100px;
+}
+
+.navbar-custom .icon-bar {
+	background-color:#fff;
+}
+
+.navbar-custom {
+	background-color: #168ccc;
+    color:#fff;
+}
+
+.navbar-custom li>a:hover,.navbar-custom li>a:focus {
+	background-color:#49bfff;
+}
+
+.navbar-custom a{
+    color:#fefefe;
+}
+
+.navbar-custom .form-control:focus {
+	border-color: #49bfff;
+	outline: 0;
+	-webkit-box-shadow: inset 0 0 0;
+	box-shadow: inset 0 0 0;
+}
+
+#main, #main>.row {
+	height:100%;
+}
+
+#main>.row {
+    overflow-y:scroll;
+}
+
+#left {
+	height:100%;
+}
+
+#map-canvas {
+	width:33.3333%;
+    height:calc(100% - 0);
+    position:absolute;
+    right:16px;
+    top:50px;
+    bottom:0;
+    overflow:hidden;
+}
