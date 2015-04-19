@@ -5,8 +5,6 @@ DESCRIPTION: Used for all the different kinds of queries the SplitRide applicati
 Query is a different function of request in the file.
 */
 
-
-
 //setting cookies if validating user
 if($_REQUEST['q']=='validate_user')
 {
@@ -29,31 +27,21 @@ error_reporting(E_ALL | E_STRICT);
     	case 'add_user':
     		addUser($_POST['first_name'], $_POST['last_name'], $_POST['email'], md5($_POST['password']));
     		break;
-    	
         case 'validate_user':
                 $encrip_password = md5($_POST['password']);
                 validateLogin($_POST['username'], $encrip_password);
                 break;
 
+        case 'get_profile_pic':
+                getUserProfilePic($_SESSION['id']);
+                break;
         case 'upload_profile_pic':
                 upload_pp($_COOKIE['user']);
                 break;
-        case 'get_trip':
-                break;
-
-        case 'get_trip_comments':
-                break;
-
-        case 'get_trip_likes':
-                break;
-
-        case 'get_user_details':
-                break;
-
-        case 'get_cost':
-                break;       
-
         
+        case 'get_user_name':
+                getUserName($_SESSION['id']);
+                break;  
 
     	default:
     		# code...
@@ -96,6 +84,10 @@ error_reporting(E_ALL | E_STRICT);
 	
 
         if(mysqli_num_rows($res) >= 1){
+            session_start();
+            $_SESSION['id'] = getUserID($username);
+            $_SESSION['username'] = $username;
+
 
             header('Location: pages/sr_homePage.html');
             exit();
@@ -138,19 +130,19 @@ error_reporting(E_ALL | E_STRICT);
 
         $pictureURL = "";
         if(mysqli_num_rows($res) >= 1){
-            echo "<h1><pre>";
+            //echo "<h1><pre>";
             while($row = $res->fetch_array())
             {
                 $pictureURL = $row['URL'];
-                echo "Pricture URL: <img src=\"".$row['URL']."\">";
-                echo "<br />";
+                //echo "Pricture URL: <img src=\"".$row['URL']."\">";
+                //echo "<br />";
             }
-            echo "</pre></h1>";
+            //echo "</pre></h1>";
         }
         else{
-            echo "Picture ID does not exist";
+            //echo "Picture ID does not exist";
         }
-
+        echo $query_func($pictureURL);
         return $pictureURL;
     }
 
@@ -277,8 +269,8 @@ error_reporting(E_ALL | E_STRICT);
 
         $userID = getUserName($username);
         echo $username;
-        $query = "INSERT INTO Pictures Values ('".$userID."','".$url."');";
-                        
+        //$query = "INSERT INTO Pictures Values ('".$userID."','".$url."');";
+        $query = "INSERT INTO Pictures Values ('$userID','$url');";
         $res = mysqli_query(getConnection(), $query);
         echo $res;
       }
