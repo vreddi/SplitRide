@@ -4,23 +4,32 @@
 $("#submit").on("click", function(e){
     getLatLn();
     //hacky synch
-    while(location == null){
+    while(location1 == null || location2 == null){
       continue;
     }
     dt = {date : getElementById("date").value,
     time : getElementById("time").value,
     seats : getElementById("seats").value,
     notes = getElementById("notes").value};
-    dat = $.extend(componentForm, location, dt);
+    dat = $.extend(componentForm1 ,location1, componentForm2, location2, dt);
     $.ajax({
         url : "/queries.php?q=plan_trip"
         data : dat
     })
 })
 
-var geocoder, location = null;
+var geocoder, location1 = null, location2 = null;
 var placeSearch, autocomplete;
-var componentForm = {
+var componentForm1 = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+
+var componentForm2 = {
   street_number: 'short_name',
   route: 'long_name',
   locality: 'long_name',
@@ -34,11 +43,19 @@ function initialize() {
   // to geographical location types.
   geocoder = new google.maps.Geocoder();
   autocomplete = new google.maps.places.Autocomplete(
-      /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+      /** @type {HTMLInputElement} */(document.getElementById('exampleInputName1')),
       { types: ['geocode'] });
   // When the user selects an address from the dropdown,
   // populate the address fields in the form.
   google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    fillInAddress();
+  });
+
+  autocomplete2 = new google.maps.places.Autocomplete(
+      /** @type {HTMLInputElement} */(document.getElementById('exampleInputName2')),
+      { types: ['geocode'] });
+
+  google.maps.event.addListener(autocomplete2, 'place_changed', function() {
     fillInAddress();
   });
 }
@@ -52,7 +69,7 @@ function fillInAddress() {
   // Get the place details from the autocomplete object.
   var place = autocomplete.getPlace();
 
-  for (var component in componentForm) {
+  for (var component in componentForm1) {
     document.getElementById(component).value = '';
 
 document.getElementById(component).disabled = false;
@@ -62,8 +79,8 @@ document.getElementById(component).disabled = false;
   // and fill the corresponding field on the form.
   for (var i = 0; i < place.address_components.length; i++) {
     var addressType = place.address_components[i].types[0];
-    if (componentForm[addressType]) {
-      var val = place.address_components[i][componentForm[addressType]];
+    if (componentForm1[addressType]) {
+      var val = place.address_components[i][componentForm1[addressType]];
       document.getElementById(addressType).value = val;
     }
   }
@@ -127,8 +144,16 @@ $(function(){
   });
 
 function getLatLn(){
-    var address = getElementById('exampleInputName2').value;
-    geocoder.geocode( { 'address': address}, function(results, status) {
+    var address1 = getElementById('exampleInputName1').value;
+    var address2 = getElementById('exampleInputName2').value
+    geocoder.geocode( { 'address1': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      location = results[0].geometry.location;
+    } else {
+        alert("Geocode was not successful for the following reason: " + status);
+     }
+    });
+    geocoder.geocode( { 'address2': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       location = results[0].geometry.location;
     } else {
