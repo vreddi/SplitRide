@@ -19,7 +19,7 @@ $("#submit").on("click", function(e){
 })
 
 var geocoder, location1 = null, location2 = null;
-var placeSearch, autocomplete;
+var placeSearch, autocomplete1, autocomplete2; 
 var componentForm1 = {
   street_number: 'short_name',
   route: 'long_name',
@@ -42,12 +42,12 @@ function initialize() {
   // Create the autocomplete object, restricting the search
   // to geographical location types.
   geocoder = new google.maps.Geocoder();
-  autocomplete = new google.maps.places.Autocomplete(
+  autocomplete1 = new google.maps.places.Autocomplete(
       /** @type {HTMLInputElement} */(document.getElementById('exampleInputName1')),
       { types: ['geocode'] });
   // When the user selects an address from the dropdown,
   // populate the address fields in the form.
-  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+  google.maps.event.addListener(autocomplete1, 'place_changed', function() {
     fillInAddress();
   });
 
@@ -67,7 +67,7 @@ function initialize() {
 */
 function fillInAddress() {
   // Get the place details from the autocomplete object.
-  var place = autocomplete.getPlace();
+  var place = autocomplete1.getPlace();
 
   for (var component in componentForm1) {
     document.getElementById(component).value = '';
@@ -84,6 +84,25 @@ document.getElementById(component).disabled = false;
       document.getElementById(addressType).value = val;
     }
   }
+
+var place = autocomplete2.getPlace();
+
+  for (var component in componentForm2) {
+    document.getElementById(component).value = '';
+
+  document.getElementById(component).disabled = false;
+  }
+
+  // Get each component of the address from the place details
+  // and fill the corresponding field on the form.
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    if (componentForm1[addressType]) {
+      var val = place.address_components[i][componentForm1[addressType]];
+      document.getElementById(addressType).value = val;
+    }
+  }
+
 }
 
 // Bias the autocomplete object to the user's geographical location,
