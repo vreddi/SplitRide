@@ -13,7 +13,7 @@ $("#submit").on("click", function(e){
     notes : getElementById("notes").value};
     dat = $.extend(componentForm1 ,location1, componentForm2, location2, dt);
     $.ajax({
-        url : "/queries.php?q=plan_trip"
+        url : "/queries.php?q=plan_trip",
         data : dat
     })
 })
