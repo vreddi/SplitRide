@@ -50,7 +50,7 @@ $('.nav li').on('click', function(){
 
 		// Remove the active class from every tab
 		$('.nav li').attr('class','');
-		
+
 		// Make the new Tab Active
 		$(this).attr('class','active');
 
@@ -61,7 +61,14 @@ $('.nav li').on('click', function(){
 });
 
 
+/**
+* Description: This function adds the Account Settings form to the profile Content Area.
+* Remember that this function does not remove the previous content in the content area on
+* the profile page.
+*/
+function addAccountSettings(){
 
+}
 
 
 		// <h3 id="profile-trips-title"> Trips Involved In: </h3>
