@@ -10,7 +10,7 @@ $("#submit").on("click", function(e){
     dt = {date : getElementById("date").value,
     time : getElementById("time").value,
     seats : getElementById("seats").value,
-    notes = getElementById("notes").value};
+    notes : getElementById("notes").value};
     dat = $.extend(componentForm1 ,location1, componentForm2, location2, dt);
     $.ajax({
         url : "/queries.php?q=plan_trip"
@@ -30,12 +30,12 @@ var componentForm1 = {
 };
 
 var componentForm2 = {
-  street_number: 'short_name',
-  route: 'long_name',
-  locality: 'long_name',
-  administrative_area_level_1: 'short_name',
-  country: 'long_name',
-  postal_code: 'short_name'
+  street_number2: 'short_name',
+  route2: 'long_name',
+  locality2: 'long_name',
+  administrative_area_level_1_2: 'short_name',
+  country_2: 'long_name',
+  postal_code_2: 'short_name'
 };
 
 function initialize() {
@@ -148,7 +148,7 @@ function getLatLn(){
     var address2 = getElementById('exampleInputName2').value
     geocoder.geocode( { 'address1': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
-      location = results[0].geometry.location;
+      location1 = results[0].geometry.location;
     } else {
         alert("Geocode was not successful for the following reason: " + status);
      }
@@ -156,6 +156,7 @@ function getLatLn(){
     geocoder.geocode( { 'address2': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       location = results[0].geometry.location;
+      location2 = { lat2 : location['lat'], lng2 : location['lng']}
     } else {
         alert("Geocode was not successful for the following reason: " + status);
      }
