@@ -1,6 +1,20 @@
 // This example displays an address form, using the autocomplete feature
 // of the Google Places API to help users fill in the information.
 
+$("#submit").on("click", function(e){
+    getLatLn();
+    //hacky synch
+    while(location == null){
+      continue;
+    }
+    dat = $.extend(componentForm, location);
+    $.ajax({
+        url : "/queries.php?q=plan_trip"
+        data : dat
+    })
+})
+
+var geocoder, location = null;
 var placeSearch, autocomplete;
 var componentForm = {
   street_number: 'short_name',
@@ -14,6 +28,7 @@ var componentForm = {
 function initialize() {
   // Create the autocomplete object, restricting the search
   // to geographical location types.
+  geocoder = new google.maps.Geocoder();
   autocomplete = new google.maps.places.Autocomplete(
       /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
       { types: ['geocode'] });
@@ -107,6 +122,16 @@ $(function(){
     });       
   });
 
+function getLatLn(){
+    var address = getElementById('exampleInputName2').value;
+    geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      location = results[0].geometry.location;
+    } else {
+        alert("Geocode was not successful for the following reason: " + status);
+     }
+    });
+}
 
 
 
