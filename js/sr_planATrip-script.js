@@ -7,7 +7,11 @@ $("#submit").on("click", function(e){
     while(location == null){
       continue;
     }
-    dat = $.extend(componentForm, location);
+    dt = {date : getElementById("date").value,
+    time : getElementById("time").value,
+    seats : getElementById("seats").value,
+    notes = getElementById("notes").value};
+    dat = $.extend(componentForm, location, dt);
     $.ajax({
         url : "/queries.php?q=plan_trip"
         data : dat
