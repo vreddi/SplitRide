@@ -1,3 +1,8 @@
+<!--
+User Profile Sidebar by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +13,13 @@
 	<link href="../css/sr_profilePage-style.css" rel="stylesheet">
 
 	<!--Sweet Alert Files-->
-	<!-- Linking Font-Awesome 4.3.0 -->
-    <link rel="stylesheet" type="text/css" href="../resources/font-awesome-4.3.0/css/font-awesome.css">
 	<script src="../resources/sweetalert-master/dist/sweetalert.min.js"></script> 
     <link rel="stylesheet" type="text/css" href="../resources/sweetalert-master/dist/sweetalert.css">
+
+    <!-- Linking Font-Awesome 4.3.0 -->
+    <link rel="stylesheet" type="text/css" href="../resources/font-awesome-4.3.0/css/font-awesome.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="../js/sr_trip-script.js"></script>
 
 </head>
 <body>
@@ -58,58 +66,27 @@
 
 	<div class="container">
 	    <div class="row profile">
-			<div class="col-md-3">
-				<div class="profile-sidebar">
-					<!-- SIDEBAR USERPIC -->
-					<div class="profile-userpic">
-						<img src="" class="img-responsive" alt="">
-					</div>
-					<!-- END SIDEBAR USERPIC -->
-					<!-- SIDEBAR USER TITLE -->
-					<div class="profile-usertitle">
-						<div class="profile-usertitle-name">
-						</div>
-						<div class="profile-usertitle-job">
-							Followers:
-						</div>
-					</div>
-					<!-- END SIDEBAR USER TITLE -->
-					<!-- SIDEBAR BUTTONS -->
-					<div class="profile-userbuttons">
-						<button type="button" id="follow" class="btn btn-success btn-sm">Follow</button>
-					</div>
-					<!-- END SIDEBAR BUTTONS -->
-					<!-- SIDEBAR MENU -->
-					<div class="profile-usermenu">
-						<ul class="nav">
-							<li class="active" id="overall">
-								<a href="#">
-								<i class="glyphicon glyphicon-home"></i>
-								Overview </a>
-							</li>
-							<li id="acSettings">
-								<a href="#" id="account">
-								<i class="glyphicon glyphicon-user"></i>
-								Account Settings </a>
-							</li>
-							<li>
-								<a href="#" id="reviews">
-								<i class="glyphicon glyphicon-check"></i>
-								Reviews </a>
-							</li>
-						</ul>
-					</div>
-					<!-- END MENU -->
-				</div>
+			
+	    	<!--Left Spacer -->
+			<div class="col-md-1">
+				
 			</div>
 
 
 			<!-- Content Area -->
-			<div class="col-md-9 ">
+			<div class="col-md-10 ">
 	            <div class="profile-content">
+
+	            	<!-- Trip Code Goes Here From the Script-->
+
 
 	              
 	            </div>
+			</div>
+
+			<!--Right Spacer -->
+			<div class="col-md-1">
+				
 			</div>
 
 
@@ -120,11 +97,10 @@
 	<br>
 
 
+<script src="../resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+<script src="../js/moments.js"></script>
+
 	<!-- script references -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-	<script src="../resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
-	<!-- Attaching Script File -->
-	<script src="../js/sr_profile-script.js"></script> 
-	<script src="../js/moments.js"></script>
+
 </body>
 </html>

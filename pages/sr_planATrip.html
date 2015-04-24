@@ -1,6 +1,4 @@
-<?php
-
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 	<head>
@@ -33,6 +31,9 @@
 
     	<link href="../css/feedStyles.css" rel="stylesheet">
 		<link href="../css/sr_planATrip-style.css" rel="stylesheet">
+
+		<script src="../resources/sweetalert-master/dist/sweetalert.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="../resources/sweetalert-master/dist/sweetalert.css">
 		 
 
 	</head>
@@ -66,10 +67,15 @@
    
               <ul class="nav navbar-nav">
                 <li>
-                  <a href="#"><i class="glyphicon glyphicon-home"></i> Home</a>
+                  <a href="http://splitride.web.engr.illinois.edu/pages/sr_homePage.php"><i class="glyphicon glyphicon-home"></i> Home</a>
                 </li>
+
                 <li>
-                  <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Plan a Trip</a>
+                  <a href="http://splitride.web.engr.illinois.edu/pages/sr_profilePage.html"><i class="glyphicon glyphicon glyphicon-user"></i> Profile</a>
+                </li>
+
+                <li>
+                  <a href="http://splitride.web.engr.illinois.edu/pages/sr_planATrip.html" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Plan a Trip</a>
                 </li>
               </ul>
             </nav>
@@ -99,14 +105,73 @@
 							 	</div>
 							  	<div class="panel-body">
 							    	
-							    	<form accept-charset="UTF-8" role="form" method="post" action="/queries.php?q=plan_trip">
+							    	<form accept-charset="UTF-8" role="form">
 				                    <fieldset>
 							    	  	<div class="form-group">
 							    		    <input class="form-control" id="exampleInputName1"  placeholder="Enter the Source"  type="text" name="source" required></input>
 							    		</div>
+							    		
+							    		<div style="visibility: hidden; height: 0px;">
+							    			
+							    			<div class="form-group">
+                    							<label for="street_number">Street No.</label>
+                    								<input class="field" id="street_number" disabled="false"></input>
+                    								<label for="route">Street Name <lable>
+                    								<input class="field" id="route" disabled="false"></input>
+                							</div>
+
+               
+
+               								<div class="form-group">
+                  								<label for="locality">City</lablel>
+                  								<input class="field" id="locality" disabled="false"></input>
+                							</div>
+                
+                							<div class="form-group">
+                  								<label for="administrative_area_level_1">State</label>
+							                    <input class="field" id="administrative_area_level_1" disabled="false"></input>
+							                    <label for="postal_code">Zip code</label>
+							                    <input class="field" id="postal_code" disabled="false"></input>
+							                 
+							                   <label for="country">Country</label>
+							                   <input class="field"id="country" disabled="false"></input>
+                							</div>
+                						</div>
+                					
+
+
 							    		<div class="form-group">
 							    			<input class="form-control" id="exampleInputName2"  placeholder="Enter the Destination" name="destination" type="text" required></input>
 							    		</div>
+
+							    		<div style="visibility: hidden; height: 0px;">
+							    			
+							    			<div class="form-group">
+                    							<label for="street_number">Street No.</label>
+                    								<input class="field" id="street_number2" disabled="false"></input>
+                    								<label for="route">Street Name <lable>
+                    								<input class="field" id="route2" disabled="false"></input>
+                							</div>
+
+               
+
+               								<div class="form-group">
+                  								<label for="locality">City</lablel>
+                  								<input class="field" id="locality2" disabled="false"></input>
+                							</div>
+                
+                							<div class="form-group">
+                  								<label for="administrative_area_level_1">State</label>
+							                    <input class="field" id="administrative_area_level_1_2" disabled="false"></input>
+							                    <label for="postal_code">Zip code</label>
+							                    <input class="field" id="postal_code2" disabled="false"></input>
+							                 
+							                   <label for="country">Country</label>
+							                   <input class="field"id="country2" disabled="false"></input>
+                							</div>
+                						</div>
+
+							    		
 
 							    		<div class="form-group">
 							    			<input class="form-control" name="date" id="date" type=date step=1 min=2014-09-8 required > 
@@ -126,7 +191,7 @@
 										</div>
 							    		
 							    
-							    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Post Trip" id = "submit">
+							    		<input id = "submit-trip" onclick="trial()" class="btn btn-lg btn-success btn-block" type="button" value="Post Trip">
 							    	</fieldset>
 							      	</form>
 
@@ -200,6 +265,9 @@
 	     </div>
 
 	-->
-		
+	<!--CDN link for the latest TweenMax-->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>	
+
+
 	</body>
 </html>

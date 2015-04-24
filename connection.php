@@ -28,7 +28,7 @@ error_reporting(E_ALL | E_STRICT);
            
         /* Getting Connection Link */
         /* Implementation: mysql_connect( __HOSTNAME__, __USERNAME__, __PASSWORD__) */ 
-        $link = mysqli_connect( 'engr-cpanel-mysql.engr.illinois.edu', 'splitrid_admin', '12345', 'splitrid_db') or die('Could not connect to server.' );
+        $link = mysqli_connect( 'engr-cpanel-mysql.engr.illinois.edu', 'splitrid_admin', 'qwerty', 'splitrid_db') or die('Could not connect to server.' );
         
         /* SELECT the Databse to Use */
         //mysqli_select_db('splitrid_db', $link) or die('Could not select database.');
