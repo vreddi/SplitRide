@@ -113,11 +113,33 @@ To accomplish this task, we employed the following steps:
 ---
 ###BASIC FUNCTIONALITY (CODE SNIPPET):
 
-''' php
-function abc(){
-    int a = 5;
-}
-'''
+```php
+//Description: Function to add Trip Details
+ function addTripDetails($TripTimeStamp, $srcID, $dstnID, $NoOfSeats, $userID, $notes){
+      $query = "INSERT INTO Trips(DriverID,TripTimeStamp, SourceID, DestinationID, NoOfSeats, NoOfSeatsAvailable, Notes) Values ('$userID','$TripTimeStamp', '$srcID','$dstnID', '$NoOfSeats', '$NoOfSeats', '$notes');";
+      $res = mysqli_query(getConnection(), $query); 
+
+      if($res==false) {
+            return false;    
+      }
+      else{ 
+           $query = "SELECT max(TripID) as last from Trips;"; 
+           $res = mysqli_query(getConnection(), $query); 
+            
+           if($res==false) 
+                 echo "problem with select max"; 
+           $row = $res->fetch_array();
+           $tripIdgenerated= $row['last'];
+            $query = "INSERT INTO TripLikes values($tripIdgenerated, 1);";
+           $res = mysqli_query(getConnection(), $query); 
+         
+           if($res==false) 
+                 echo "problem with insert"; 
+
+           return true; 
+          }
+} 
+```
 
 The above function adds the trip details to the Database when a user plans/creates a trip on the front end. 
 
@@ -130,10 +152,8 @@ One common programming practice is to make functions small and atomic and good a
 Our final product had several deviations from the schema that was originally proposed in Stage 1. In the end we added an additional entity in our ER model for places that people would share rides to and from. In addition, we added several attributes to existing entities.  We also removed certain relations that were present in the original model which ended up being unnecessary to achieve functionality in our model.
 
 ---
-###TEAM LOGO:
-![Alt Text](https://github.com/vreddi/SplitRide/blob/master/resources/images/heisenbug.png)
-
+###TEAM LOGO: ![Alt Text](https://github.com/vreddi/SplitRide/blob/master/resources/images/heisenbug.png)
 ---
 ###VIDEO DEMO:
-
+(Click to Play)
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/N7fzvAA8gxU/0.jpg)](http://www.youtube.com/watch?v=N7fzvAA8gxU)
