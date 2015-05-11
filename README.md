@@ -81,7 +81,7 @@ The application basically serves the following broad functions -
 
 <b><u>6. Review Drivers/Co-Passengers:</u></b> We believe that riders should be able to express their feelings after a trip and thus allow them to review their drivers or co-passengers by accessing the review form on every user's profiles. Also since all reviews are shown without any moderation, we allow users to lookup their co-riders' profiles and reviews in advance and make informed decisions.
 
-<b><u>7Logout:</b></u> Safely Logout of our servers and enjoy your ride!
+<b><u>7. Logout:</b></u> Safely Logout of our servers and enjoy your ride!
 
 ---
 ###ADVANCED FUNCTIONALITY:
