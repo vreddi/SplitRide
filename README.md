@@ -152,12 +152,13 @@ One common programming practice is to make functions small and atomic and good a
 Our final product had several deviations from the schema that was originally proposed in Stage 1. In the end we added an additional entity in our ER model for places that people would share rides to and from. In addition, we added several attributes to existing entities.  We also removed certain relations that were present in the original model which ended up being unnecessary to achieve functionality in our model.
 
 ---
-###TEAM LOGO: 
-
-![](https://github.com/vreddi/SplitRide/blob/master/resources/images/heisenbug.png =100x)
----
 ###VIDEO DEMO:
 <p>
 (Click to Play)
 </p>
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/N7fzvAA8gxU/0.jpg)](http://www.youtube.com/watch?v=N7fzvAA8gxU)
+
+---
+###TEAM LOGO: 
+
+![Alt Text](https://github.com/vreddi/SplitRide/blob/master/resources/images/heisenbug.png)
