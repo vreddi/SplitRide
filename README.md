@@ -154,7 +154,7 @@ Our final product had several deviations from the schema that was originally pro
 ---
 ###TEAM LOGO: 
 
-![Alt Text](https://github.com/vreddi/SplitRide/blob/master/resources/images/heisenbug.png 100x100)
+![Alt Text](https://github.com/vreddi/SplitRide/blob/master/resources/images/heisenbug.png width="100")
 ---
 ###VIDEO DEMO:
 <p>
