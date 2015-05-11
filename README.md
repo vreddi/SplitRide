@@ -83,3 +83,67 @@ The application basically serves the following broad functions -
 <b><u>6. Review Drivers/Co-Passengers:</u></b> We believe that riders should be able to express their feelings after a trip and thus allow them to review their drivers or co-passengers by accessing the review form on every user's profiles. Also since all reviews are shown without any moderation, we allow users to lookup their co-riders' profiles and reviews in advance and make informed decisions.
 
 <b><u>Logout:</b></u> Safely Logout of our servers and enjoy your ride!
+
+Advanced Functionality:
+Trip Details Page & Profile System: Like we mentioned before, the different user perspective is the most powerful functionality out of all. The Trip page is where different kinds of users have different functionality. The page is the same but the application recognizes the user and then intelligently provides the user with his restricted functionality. The easiest way to explain this is with an example. So lets say a Driver created a Trip Page. Then we he visits that page he would have the functionality of canceling that trip (as it is his trip) and removing currently joined riders from that trip. When a Rider joins that trip and visits that page, He only has the restricted functionality to opt out of the trip i.e get out of that trip. Once out then he would again have the functionality of joining that trip. If the number of riders are all full for the trip then no more Riders are allowed to join the trip page. The trip page also recognizes if the Returning Rider is already in the trip or not. So a lot of information is perceived by that page in order to cater the right kind of user. 
+
+We tackled this problem very intelligently where encrypted user's Unique ID grabbed fro the backend inside the DOM (The link for the profile page of each user). This method proved to be most efficient as the data for redirection and presentation of restricted functionality for specific users could be directly identified by parsing the DOM using JQuery. Our use of huge JSON files reduced the number of PHP Query request that we made which in-turn made the site faster and more efficient.
+
+We also added profile system to our application also much like any real world application. Our goal here was to get as close to a working real world model as possible. Each user can view his/her profile along with the capabilities of changing their Account Details and browsing their Reviews. Any user can click on any user on the website and it would redirect to a profile template loaded up with the requested user's information. The application intelligently decides that the incoming user is not the owner of the profile and hence should not get profile privileges such as changing Email, FirstName, LastName etc. Users can also follow other users (just like in twitter) which gives them a sense of popularity within the community.
+ 
+Search: Our website offers a very useful Search function, complete with case insensitivity and being able to search for every word in the search query separately such that even if the user only slightly remembers what he/she's looking for, he's bound to move only ahead with our unique Search.
+Very broadly, our search displays the following kind of results:
+By User Names  – The strings would be searched against the user table, especially the FirstName and LastName attribute, so as to give a list of all users where the search string is a part of their name or substring of their name.
+By Source/Destination of Trips – The strings would be searched against the Places database to get a list of all those trips where the search string occurs in the source name or destination name.
+However simple that sounds, it wasn't that easy to implement, specially since we aimed at doing the entire search in just two queries. Yes, all trip details and user details query the database just once! This results in exceptional speedy results and thus enhances user experience. 
+To accomplish this task, we employed the following steps:
+Accepted the string and posted it to the php page.
+Constructed a partial query which returned every trip detail (along with Driver, Place, Likes, and Comments details - joining more than 5 tables).
+Tokenized the string (to get the first word) and appended lower(Source.Address) like lower('%token%') to the end of the partial query.
+We keep tokenizing the string until we get nothing and appending as above.
+We then run the entire query and push each tuple into an array.
+We then encode it into a JSON which is then parsed by the JS file.
+The entire task from its conception to debugging to accomplishing it took us a good amount of time and we learned plenty from the experience, both in front-end and back-end.
+
+---
+###BASIC FUNCTIONALITY (CODE SNIPPET):
+---
+'''php
+//Description: Function to add Trip Details
+ function addTripDetails($TripTimeStamp, $srcID, $dstnID, $NoOfSeats, $userID, $notes){
+      $query = "INSERT INTO Trips(DriverID,TripTimeStamp, SourceID, DestinationID, NoOfSeats, NoOfSeatsAvailable, Notes) Values ('$userID','$TripTimeStamp', '$srcID','$dstnID', '$NoOfSeats', '$NoOfSeats', '$notes');";
+      $res = mysqli_query(getConnection(), $query); 
+
+      if($res==false) {
+            return false;    
+      }
+      else{ 
+           $query = "SELECT max(TripID) as last from Trips;"; 
+           $res = mysqli_query(getConnection(), $query); 
+            
+           if($res==false) 
+                 echo "problem with select max"; 
+           $row = $res->fetch_array();
+           $tripIdgenerated= $row['last'];
+            $query = "INSERT INTO TripLikes values($tripIdgenerated, 1);";
+           $res = mysqli_query(getConnection(), $query); 
+         
+           if($res==false) 
+                 echo "problem with insert"; 
+
+           return true; 
+          }
+} '''
+
+
+The above function adds the trip details to the Database when a user plans/creates a trip on the front end. 
+
+---
+###Technical Challange:
+---
+One common programming practice is to make functions small and atomic and good at accomplishing a single task.  As we were developing the controller layer of our application, we attempted to apply this principle to the PHP functions which contained our queries.  In essence, each individual database query had a single php function which corresponded to it.  This negatively affected the performance of our site as for every page load, there would be dozens of  server requests would be made from our site which would require many queries.  This was because that request would then make many php calls, which would in turn make many individual SQL queries, causing a dramatic increase in server response time.  To deal with this, we were forced to refactor a significant chunk of our php code to include larger php functions which perform many queries in a single call. This wasn't easy at all, especially with the frustrating number of joins and the fact that the omission of even a comma would mean breaking the website. Although this was challenging, the performance gain was well worth the refactoring time. Now the website is snappy and neat.
+
+---
+###Deviations From Initial Proposal:
+---
+Our final product had several deviations from the schema that was originally proposed in Stage 1.  In the end we added an additional entity in our ER model for places that people would share rides to and from.  In addition, we added several attributes to existing entities.  We also removed certain relations that were present in the original model which ended up being unnecessary to achieve functionality in our model.
