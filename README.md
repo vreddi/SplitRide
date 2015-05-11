@@ -48,8 +48,8 @@ We believe that having an exclusive application solely dedicated to ride-sharing
 | Users |
 
 For more details about realtions and other aspects about the schema check the "Database Schema" Directory.
----
 
+---
 ###ER-DIAGRAM:
 
 ![Alt Text](https://github.com/vreddi/SplitRide/blob/master/resources/images/ERDiagram.png)
